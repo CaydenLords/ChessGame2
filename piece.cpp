@@ -28,6 +28,70 @@ const Piece & Piece::operator = (const Piece & rhs)
 }
 
 /************************************************
+ * PIECE : IS WHITE
+ * OUTPUT: tells if piece is white or not
+ ***********************************************/
+bool Piece::isWhite() const
+{
+   return fWhite;
+}
+
+/************************************************
+ * PIECE : IS MOVED
+ * OUTPUT: tells if piece has moved or not
+ ***********************************************/
+bool Piece::isMoved() const
+{
+   if (nMoves == 0)
+      return false;
+   else
+      return true;
+}
+
+/************************************************
+ * PIECE : GET N MOVES
+ * OUTPUT: Number of moves
+ ***********************************************/
+int Piece::getNMoves() const
+{
+   return nMoves;
+}
+
+/************************************************
+ * PIECE : GET POSITION
+ * OUTPUT: Return's the classes position
+ ***********************************************/
+const Position& Piece::getPosition() const
+{
+   return position;
+}
+
+/************************************************
+ * PIECE : JUST MOVED
+ * INPUT: current move number
+ * OUTPUT: tells if piece just moved or not
+ ***********************************************/
+bool Piece::justMoved(int currentMove) const
+{
+   if (currentMove > (lastMove + 1))
+      return false;
+   else
+      return true;
+}
+
+/************************************************
+ * PIECE : SET LAST MOVE
+ * INPUT: current move number
+ * 
+ ***********************************************/
+void Piece::setLastMove(int currentMove)
+{
+   lastMove = currentMove;
+   nMoves++;
+}
+
+
+/************************************************
  * PIECE : GET MOVES
  * Iterate through the moves decorator to allow a piece to move
  ***********************************************/

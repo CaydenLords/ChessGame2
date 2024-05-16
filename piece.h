@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include <iostream>
 #include <set>         // for SET to return a set of possible moves
 #include <list>        // for the move-type,list
 #include <cassert>
@@ -60,15 +61,15 @@ public:
    // getters
    virtual bool operator == (PieceType pt) const { return true;         }
    virtual bool operator != (PieceType pt) const { return true;         }
-   virtual bool isWhite()                  const { return true;         }
-   virtual bool isMoved()                  const { return true;         }
-   virtual int  getNMoves()                const { return 9999;         }
+   virtual bool isWhite()                  const;
+   virtual bool isMoved()                  const;
+   virtual int  getNMoves()                const;
    virtual void decrementNMoves()                {                      }
-   virtual const Position & getPosition()  const { return Position();   }
-   virtual bool justMoved(int currentMove) const { return true;         }
+   virtual const Position& getPosition()   const;
+   virtual bool justMoved(int currentMove) const;
 
    // setter
-   virtual void setLastMove(int currentMove)     {                      }
+   virtual void setLastMove(int currentMove);
 
    // overwritten by the various pieces
    virtual PieceType getType()                                    const = 0;
@@ -93,10 +94,29 @@ class PieceDerived : public Piece
 {
 public:
    PieceDerived(const Position& pos, bool isWhite) : Piece(9, 9) { }
-   PieceDerived(int c, int r, bool isWhite) : Piece(9, 9)        { }
-   ~PieceDerived()                                                       { }
-   PieceType getType()            const     { return SPACE;                }
-   void display(ogstream* pgout)  const     { assert(false);               }
+   PieceDerived(int c, int r, bool isWhite) : Piece(9, 9) { }
+   ~PieceDerived() { }
+   PieceType getType()            const { return SPACE; }
+   void display(ogstream* pgout)  const { assert(false); }
+   PieceDerived& operator=(const PieceDerived& rhs)
+   {
+      if (this == &rhs)
+         return *this;
+
+      this->fWhite = rhs.fWhite;
+      this->lastMove = rhs.lastMove;
+      this->nMoves = rhs.nMoves;
+
+      return *this;
+   }
+   bool PieceDerived::operator!=(const PieceType& rhs) const
+   {
+      return !(*this == rhs);
+   }
+   bool PieceDerived::operator==(const PieceType& rhs) const
+   {
+      return this->getType() == rhs;
+   }
 };
 
 
