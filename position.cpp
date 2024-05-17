@@ -35,11 +35,7 @@ istream& operator >> (istream& in, Position& rhs)
  **************************************/
 int Position::getCol() const
 {
-	if (isInvalid())
-	{
-		return -1;
-	}
-	return (int)((colRow & 0xf0) >> 4);
+	return (colRow >> 4) & 0x0F;
 }
 
 /*************************************
@@ -50,11 +46,7 @@ int Position::getCol() const
  **************************************/
 int Position::getRow() const
 {
-	if (isInvalid())
-	{
-		return -1;
-	}
-	return (int)((colRow & 0x0f) >> 0);
+	return colRow & 0x0F;
 }
 
 /*************************************
@@ -64,7 +56,7 @@ int Position::getRow() const
  **************************************/
 void Position::setCol(int c)
 {
-	colRow = getRow() + (c * 16);
+	colRow = (colRow & 0x0F) | (c << 4);
 }
 
 /*************************************
@@ -74,7 +66,7 @@ void Position::setCol(int c)
  **************************************/
 void Position::setRow(int r)
 {
-	colRow = (getCol() * 16) + r;
+	colRow = (colRow & 0xF0) | r;
 }
 
 /*************************************
@@ -85,7 +77,9 @@ void Position::setRow(int r)
  **************************************/
 void Position::set(int c, int r)
 {
-	colRow = (c * 16) + r;
+	setCol(c);
+	setRow(r);
+
 	if (isInvalid())
 	{
 		colRow = 0xff;
