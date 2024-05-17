@@ -35,6 +35,10 @@ istream& operator >> (istream& in, Position& rhs)
  **************************************/
 int Position::getCol() const
 {
+	if (isInvalid())
+	{
+		return -1;
+	}
 	return (colRow >> 4) & 0x0F;
 }
 
@@ -46,6 +50,10 @@ int Position::getCol() const
  **************************************/
 int Position::getRow() const
 {
+	if (isInvalid())
+	{
+		return -1;
+	}
 	return colRow & 0x0F;
 }
 
