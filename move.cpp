@@ -24,6 +24,15 @@ Move::Move()
 	source = Position();
 	dest = Position();
 }
+/***************************************************
+ * MOVE : TWO POSITION CONSTRUCTOR
+ ***************************************************/
+Move::Move(Position sourceP, Position destP, PieceType piece)
+{
+	source = sourceP;
+	dest = destP;
+	capture = piece;
+}
 
 /*************************************
  * pieceTypeFromLetter

@@ -31,6 +31,7 @@ public:
 
    // constructor
    Move();
+	Move(Position sourceP, Position destP, PieceType piece);
    Move(const string & rhs) {
 		text = rhs;
 		string srcChars = text.substr(0, 2);

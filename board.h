@@ -12,6 +12,7 @@
 #include <stack>
 #include <cassert>
 #include "move.h"   // Because we return a set of Move
+#include "pieceSpace.h"
 
 class ogstream;
 class TestPawn;
@@ -23,7 +24,7 @@ class TestKing;
 class TestBoard;
 class Position;
 class Piece;
-
+class Space;
 
 
 /***************************************************
@@ -128,7 +129,7 @@ public:
       if (board[pos.getCol()][pos.getRow()])
          return *(board[pos.getCol()][pos.getRow()]);
       else
-         return *pSpace;
+         return Space(pos.getCol(), pos.getRow());
    }
    int  getCurrentMove() const { return moveNumber; }
 };

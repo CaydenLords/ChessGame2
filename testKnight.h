@@ -2,7 +2,7 @@
  * Header File:
  *    TEST KNIGHT
  * Author:
- *    <your name here>
+ *    Cayden Lords
  * Summary:
  *    The unit tests for Knight
  ************************************************************************/
