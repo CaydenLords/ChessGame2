@@ -165,7 +165,7 @@ public:
    void setLastMove(int currentMove)     { assert(false);               }
 
    // overwritten by the various pieces
-   PieceType getType()             const { assert(false); return SPACE; }
+   PieceType getType()             const { return SPACE; }
    void display(ogstream * pgout)  const { assert(false);               }
 };
 

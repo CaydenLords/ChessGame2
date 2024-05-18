@@ -58,6 +58,7 @@ void TestKnight::getMoves_end()
    board.board[6][0] = nullptr; // white knight
    board.board[4][1] = nullptr; // black pawn
    board.board[5][2] = nullptr; // white pawn
+   moves.clear();
 }
 
 /*************************************
@@ -117,6 +118,7 @@ void TestKnight::getMoves_blocked()
    board.board[1][3] = nullptr; // pawn 6
    board.board[1][5] = nullptr; // pawn 7
    board.board[2][6] = nullptr; // pawn 8
+   moves.clear();
 }
 
 /*************************************
@@ -161,7 +163,9 @@ void TestKnight::getMoves_capture()
 
    // EXERCISE
    knight.getMoves(moves, board);
-
+   for (Move item: moves) {
+      std::cout << item.getText() << "\n";
+   }
    // VERIFY
    assertUnit(moves.size() == 8);  // many possible moves
    assertUnit(moves.find(Move("d5c7p")) != moves.end());
@@ -183,6 +187,7 @@ void TestKnight::getMoves_capture()
    board.board[1][3] = nullptr; // pawn 6
    board.board[1][5] = nullptr; // pawn 7
    board.board[2][6] = nullptr; // pawn 8
+   moves.clear();
 }
 
 /*************************************
@@ -225,6 +230,7 @@ void TestKnight::getMoves_free()
 
    // TEARDOWN
    board.board[3][4] = nullptr; // white knight
+   moves.clear();
 }
 
 

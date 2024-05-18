@@ -70,7 +70,7 @@ public:
 		}
    }
 	bool operator <  (const Move& rhs) const { return dest < rhs.dest; }
-	bool operator == (const Move& rhs) const { return ((source == source) && (dest == dest)); }
+	bool operator == (const Move& rhs) const { return (text == rhs.text); }
 	bool operator != (const Move& rhs) const { return !(*this == rhs); }
 	const Position& operator =  (const Move& rhs) {
 		source = rhs.source;
