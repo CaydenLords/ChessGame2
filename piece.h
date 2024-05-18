@@ -67,12 +67,14 @@ public:
    virtual bool isWhite()                  const;
    virtual bool isMoved()                  const;
    virtual int  getNMoves()                const;
+   virtual void incrementNMoves();
    virtual void decrementNMoves()                {                      }
    virtual const Position& getPosition()   const;
    virtual bool justMoved(int currentMove) const;
 
    // setter
    virtual void setLastMove(int currentMove);
+   void setPosition(const Position & pos);
 
    // overwritten by the various pieces
    virtual PieceType getType()                                    const = 0;
@@ -179,7 +181,7 @@ public:
    {
       numConstruct++;
    }
-   PieceSpy(const PieceSpy& piece) : PieceDummy(piece), pt(SPACE)
+   PieceSpy(const PieceSpy& piece) : PieceDummy(piece), pt(piece.pt)
    {
       numCopy++;
    }

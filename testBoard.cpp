@@ -530,8 +530,14 @@ void TestBoard::move_knightMove()
    board.board[4][4]->nMoves = 17;
    PieceSpy::reset();
 
+   //std::cout << "4, 4: " << board.board[4][4]->getType() << std::endl;
+   //std::cout << "2, 5: " << board.board[2][5]->getType() << std::endl;
+
    // EXERCISE
    board.move(move);
+
+   //std::cout << "4, 4: " << board.board[4][4]->getType() << std::endl;
+   //std::cout << "2, 5: " << board.board[2][5]->getType() << std::endl;
 
    // VERIFY
    assertUnit(18 == board.numMoves);

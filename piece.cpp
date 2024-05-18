@@ -57,6 +57,11 @@ int Piece::getNMoves() const
    return nMoves;
 }
 
+void Piece::incrementNMoves()
+{
+   nMoves++;
+}
+
 /************************************************
  * PIECE : GET POSITION
  * OUTPUT: Return's the classes position
@@ -88,6 +93,11 @@ void Piece::setLastMove(int currentMove)
 {
    lastMove = currentMove;
    nMoves++;
+}
+
+void Piece::setPosition(const Position & pos)
+{
+   position = pos;
 }
 
 

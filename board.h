@@ -129,7 +129,7 @@ public:
       if (board[pos.getCol()][pos.getRow()])
          return *(board[pos.getCol()][pos.getRow()]);
       else
-         return Space(pos.getCol(), pos.getRow());
+         return *pSpace;
    }
    int  getCurrentMove() const { return moveNumber; }
 };

@@ -13,6 +13,7 @@
 #include "piece.h"
 #include "pieceSpace.h"
 #include "pieceKnight.h"
+#include "move.h"
 #include <cassert>
 using namespace std;
 
@@ -138,6 +139,16 @@ void Board::assertBoard()
  *********************************************/
 void Board::move(const Move & move)
 {  
+   // Perform the move
+   Piece* pPiece = board[move.source.getCol()][move.source.getRow()];
+   board[move.dest.getCol()][move.dest.getRow()] = pPiece;
+   board[move.source.getCol()][move.source.getRow()] = new PieceDummy;
+
+   // Update the piece's position
+   pPiece->setPosition(move.dest);
+
+   pPiece->incrementNMoves();
+   numMoves++;
 
 }
 

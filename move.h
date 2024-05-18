@@ -16,6 +16,7 @@
 
 class TestMove;
 class TestBoard;
+class Board;
 
 /***************************************************
  * MOVE
@@ -28,6 +29,7 @@ public:
 
    friend TestMove;
    friend TestBoard;
+	friend Board;
 
    // constructor
    Move();
@@ -84,7 +86,7 @@ public:
 
 
 
-private:
+protected:
 	char letterFromPieceType(PieceType pt)     const;
 	PieceType pieceTypeFromLetter(char letter) const;
 
