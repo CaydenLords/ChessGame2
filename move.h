@@ -41,8 +41,8 @@ public:
 		source = Position(srcChars.c_str());
 		dest = Position(destChars.c_str());
 
-		source = (source.getCol(), source.getRow());
-		dest = (dest.getCol(), dest.getRow());
+		source = Position(source.getCol(), source.getRow());
+		dest = Position(dest.getCol(), dest.getRow());
 
 		if (size(text) == 4)
 		{
@@ -81,7 +81,42 @@ public:
 		isWhite = rhs.isWhite;
 		text = rhs.text;
 	}
-   void read(const string & rhs) {}
+   void read(const string & rhs) 
+	{
+		text = rhs;
+		string srcChars = text.substr(0, 2);
+		string destChars = text.substr(2, 2);
+		source = Position(srcChars.c_str());
+		dest = Position(destChars.c_str());
+
+		source = (source.getCol(), source.getRow());
+		dest = (dest.getCol(), dest.getRow());
+
+		if (size(text) == 4)
+		{
+			moveType = MoveType{ MOVE };
+		}
+		else if (size(text) == 5)  // Check that text is long enough
+		{
+			switch (text[4])
+			{
+			case 'E':
+				moveType = MoveType{ ENPASSANT };
+				break;
+			case 'c':
+				moveType = MoveType{ CASTLE_KING };
+				break;
+			case 'C':
+				moveType = MoveType{ CASTLE_QUEEN };
+				break;
+			default:
+				PieceType piece = pieceTypeFromLetter(text[4]);
+				capture = piece;
+				moveType = MoveType{ MOVE };
+				break;
+			}
+		}
+	}
 	string getText() const;
 
 

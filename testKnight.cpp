@@ -44,11 +44,6 @@ void TestKnight::getMoves_end()
    // EXERCISE
    knight.getMoves(moves, board);
 
-   for (const Move& move: moves)
-   {
-      std::cout << move.getText() << std::endl;
-   }
-
    // VERIFY
    assertUnit(moves.size() == 2);  // many possible moves
    assertUnit(moves.find(Move("g1e2p")) != moves.end());
@@ -163,9 +158,6 @@ void TestKnight::getMoves_capture()
 
    // EXERCISE
    knight.getMoves(moves, board);
-   for (Move item: moves) {
-      std::cout << item.getText() << "\n";
-   }
    // VERIFY
    assertUnit(moves.size() == 8);  // many possible moves
    assertUnit(moves.find(Move("d5c7p")) != moves.end());

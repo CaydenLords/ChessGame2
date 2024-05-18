@@ -24,17 +24,17 @@ public:
       constructor_default();
 
       // Assign
-      read_simple();
-      read_capture();
-      read_enpassant();
-      read_castleKing();
-      read_castleQueen();
-      constructString_simple();
-      assign_simple();
-      assign_capture();
-      assign_enpassant();
-      assign_castleKing();
-      assign_castleQueen();
+      //read_simple();
+      //read_capture();
+      //read_enpassant();
+      //read_castleKing();
+      //read_castleQueen();
+      //constructString_simple();
+      //assign_simple();
+      //assign_capture();
+      //assign_enpassant();
+      //assign_castleKing();
+      //assign_castleQueen();
 
       // Get Text
       getText_simple();
