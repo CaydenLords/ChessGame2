@@ -158,6 +158,9 @@ void TestKnight::getMoves_capture()
 
    // EXERCISE
    knight.getMoves(moves, board);
+   //for (Move item: moves) {
+      //std::cout << item.getText() << "\n";
+   //}
    // VERIFY
    assertUnit(moves.size() == 8);  // many possible moves
    assertUnit(moves.find(Move("d5c7p")) != moves.end());

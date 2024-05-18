@@ -14,13 +14,16 @@
 #include "piece.h"        // for PIECE and company
 #include "board.h"        // for BOARD
 #include "test.h"
+#include <vector>
+#include <utility>
 #include <set>            // for STD::SET
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
 #include <string>         // for STRING
 using namespace std;
 
-
+vector <pair<Position, bool>> knights = { {Position(1,0), false}, {Position(6, 0), false}, {Position(1, 7), true}, {Position(6, 7), true} };
+ogstream stream;
 /*************************************
  * All the interesting work happens here, when
  * I get called back from OpenGL to draw a frame.
@@ -30,9 +33,17 @@ using namespace std;
  **************************************/
 void callBack(Interface *pUI, void * p)
 {
+
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p; 
+
+   // Draw the board and knights
+   stream.drawBoard();
+   for (const pair<Position, bool> knight : knights)
+   {
+      stream.drawKnight(knight.first, knight.second);
+   };
 }
 
 
