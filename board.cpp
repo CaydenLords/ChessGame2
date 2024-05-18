@@ -15,6 +15,7 @@
 #include "pieceKnight.h"
 #include "move.h"
 #include <cassert>
+#include <vector>
 using namespace std;
 
 
