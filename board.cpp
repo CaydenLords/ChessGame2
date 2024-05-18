@@ -40,11 +40,19 @@ void Board::reset(bool fFree)
    // free everything
    for (int r = 0; r < 8; r++)
       for (int c = 0; c < 8; c++)
-         board[c][r] = nullptr;
+      {
+         //delete board[c][r];
+         board[c][r]  = nullptr;
+      }
+         
+
+   // add knights...????
+   board[1][0] = new Knight(Position(1, 0), false);
+   board[6][0] = new Knight(Position(6, 0), false);
+   board[1][7] = new Knight(Position(1, 7), true);
+   board[6][7] = new Knight(Position(6, 7), true);
 }
 
-// we really REALLY need to delete this.
-Space space(0,0);
 
 /***********************************************
 * BOARD : GET
@@ -71,7 +79,16 @@ Piece& Board::operator [] (const Position& pos)
  ***********************************************/
 void Board::display(const Position & posHover, const Position & posSelect) const
 {
+   vector<std::pair<Position, bool>> knights = { {Position(1, 0), false}, {Position(6, 0), false}, {Position(1, 7), true}, {Position(6, 7), true} };
+   ogstream stream;
 
+   // draw the board and knights
+   stream.drawBoard();
+   for (const auto& knight : knights) 
+   {
+      stream.drawKnight(knight.first, knight.second);
+   };
+   
 }
 
 /***********************************************

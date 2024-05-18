@@ -22,20 +22,6 @@
 #include <string>         // for STRING
 using namespace std;
 
-void draw(const Board* board, const Interface &ui, const set <int> & possible)
-{
-   const vector <pair<Position, bool>> knights = { {Position(1,0), false}, {Position(6, 0), false}, {Position(1, 7), true}, {Position(6, 7), true} };
-   ogstream stream;
-
-   // Draw the board and knights
-   stream.drawBoard();
-   for (const auto& knight : knights)
-   {
-      stream.drawKnight(knight.first, knight.second);
-   };
-}
-
-
 /*************************************
  * All the interesting work happens here, when
  * I get called back from OpenGL to draw a frame.
@@ -45,12 +31,12 @@ void draw(const Board* board, const Interface &ui, const set <int> & possible)
  **************************************/
 void callBack(Interface *pUI, void * p)
 {
-   set <int> possible;
+
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p; 
 
-   draw(pBoard, *pUI, possible);
+   pBoard->display(Position(0,0), Position(0,0));
    
 }
 
@@ -81,6 +67,7 @@ int main(int argc, char** argv)
    Board board(pgout);
 
    // set everything into action
+   board.reset();
    ui.run(callBack, (void *)(&board));      
    
    // All done.
