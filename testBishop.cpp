@@ -33,7 +33,34 @@
  **************************************/
 void TestBishop::getMoves_blocked()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   BoardEmpty board;
+   Bishop bishop(2, 1, false /*white*/);
+   bishop.fWhite = true;
+   bishop.position.set(2, 1);
+   board.board[2][1] = &bishop;
+   White white1(PAWN);
+   board.board[1][0] = &white1;
+   White white2(PAWN);
+   board.board[3][0] = &white2;
+   White white3(PAWN);
+   board.board[1][2] = &white3;
+   White white4(PAWN);
+   board.board[3][2] = &white4;
+   set <Move> moves;
+
+   // EXERCISE
+   bishop.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 0);  // many possible moves
+
+   // TEARDOWN
+   board.board[2][1] = nullptr; // white Bishop
+   board.board[1][0] = nullptr; // white pawn
+   board.board[3][0] = nullptr; // white pawn
+   board.board[1][2] = nullptr; // white pawn
+   board.board[3][2] = nullptr; // white pawn
+   moves.clear();
 }
 
 /*************************************

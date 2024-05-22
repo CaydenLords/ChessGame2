@@ -108,3 +108,41 @@ void Piece::setPosition(const Position & pos)
 void Piece::getMoves(set <Move> & movesSet, const Board & board) const
 {
 }
+
+/************************************************
+ * PIECE : GET DIAGONAL MOVES
+ * Iterate through all of the diagonal slide moves
+ ***********************************************/
+void Piece::diagonalMoves(set <Move>& moves, const Board& board) const{
+   // List of Possible moves
+   Delta possibleMoves[8] =
+   {
+   { -1, 1},          { 1,  1},
+
+   { -1, -1},         { 1, -1},
+   };
+
+   // For each possible move
+   for (int i = 0; i < 4; i++)
+   {
+      Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
+      bool continueSlide = true;
+      // Check that it's valid
+      if (pos.isValid()) {
+         while (continueSlide) {
+            // Check whether it's a space
+            if (board[pos].getType() == SPACE) {
+               moves.insert(Move(position, pos, SPACE));
+            }
+            // Otherwise, check if it's a capturable piece
+            else if (board[pos].isWhite() != isWhite()) {
+               moves.insert(Move(position, pos, board[pos].getType()));
+               continueSlide = false;
+            }
+            else {
+               continueSlide = false;
+            }
+         }
+      }
+   }
+}

@@ -29,5 +29,5 @@ void Bishop::display(ogstream* pgout) const
  *********************************************/
 void Bishop::getMoves(set <Move>& moves, const Board& board) const
 {
-
+   this->diagonalMoves(moves, board);
 }
