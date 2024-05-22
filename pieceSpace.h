@@ -24,7 +24,7 @@ public:
    Space(int c, int r) : Piece(c, r)   { position = Position(c, r); }
    ~Space()                            {                            }
    PieceType getType()           const { return SPACE;              }
-   void display(ogstream* pgout) const {                            }
+   void display(ogstream* pgout) const {  }
 
 
 };

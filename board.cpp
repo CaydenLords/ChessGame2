@@ -13,6 +13,11 @@
 #include "piece.h"
 #include "pieceSpace.h"
 #include "pieceKnight.h"
+#include "pieceRook.h"
+#include "pieceBishop.h"
+#include "pieceKing.h"
+#include "pieceQueen.h"
+#include "piecePawn.h"
 #include "move.h"
 #include <cassert>
 #include <vector>
@@ -46,11 +51,27 @@ void Board::reset(bool fFree)
       }
          
 
-   // add knights...????
+   // add pieces
+   board[0][0] = new Rook(Position(0, 0), false);
    board[1][0] = new Knight(Position(1, 0), false);
+   board[2][0] = new Bishop(Position(2, 0), false);
+   board[3][0] = new Queen(Position(3, 0), false);
+   board[4][0] = new King(Position(4, 0), false);
+   board[5][0] = new Bishop(Position(5, 0), false);
    board[6][0] = new Knight(Position(6, 0), false);
+   board[7][0] = new Rook(Position(7, 0), false);
+   board[0][7] = new Rook(Position(0, 7), true);
    board[1][7] = new Knight(Position(1, 7), true);
+   board[2][7] = new Bishop(Position(2, 7), true);
+   board[3][7] = new Queen(Position(3, 7), true);
+   board[4][7] = new King(Position(4, 7), true);
+   board[5][7] = new Bishop(Position(5, 7), true);
    board[6][7] = new Knight(Position(6, 7), true);
+   board[7][7] = new Rook(Position(7, 7), true);
+   for (int x = 0; x < 8; x++) {
+      board[x][1] = new Pawn(Position(x, 1), false);
+      board[x][6] = new Pawn(Position(x, 6), true);
+   }
 }
 
 
@@ -79,15 +100,17 @@ Piece& Board::operator [] (const Position& pos)
  ***********************************************/
 void Board::display(const Position & posHover, const Position & posSelect) const
 {
-   vector<std::pair<Position, bool>> knights = { {Position(1, 0), false}, {Position(6, 0), false}, {Position(1, 7), true}, {Position(6, 7), true} };
    ogstream stream;
 
    // draw the board and knights
    stream.drawBoard();
-   for (const auto& knight : knights) 
-   {
-      stream.drawKnight(knight.first, knight.second);
-   };
+   for (int r = 0; r < 8; r++)
+      for (int c = 0; c < 8; c++)
+      {
+         if (board[c][r] != nullptr){
+            board[c][r]->display(&stream);
+         }
+      }
    
 }
 

@@ -118,8 +118,8 @@ public:
    int getX()   const { return 99; }
    int getY()   const { return 99; }
    void setXY(double x, double y) { }
-   double getSquareWidth()  const { return 99; }
-   double getSquareHeight() const { return 99; }
+   double getSquareWidth()  const { return SIZE_SQUARE; }
+   double getSquareHeight() const { return SIZE_SQUARE; }
    void setSquareWidth(double width) {  }
    void setSquareHeight(double height) {  }
 

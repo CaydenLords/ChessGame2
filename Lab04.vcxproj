@@ -102,10 +102,12 @@
     <ClCompile Include="chess.cpp" />
     <ClCompile Include="move.cpp" />
     <ClCompile Include="piece.cpp" />
-    <ClCompile Include="pieceBishop.h" />
-    <ClCompile Include="pieceKing.h" />
+    <ClCompile Include="pieceBishop.cpp" />
+    <ClCompile Include="pieceKing.cpp" />
     <ClCompile Include="pieceKnight.cpp" />
-    <ClCompile Include="piecePawn.h" />
+    <ClCompile Include="piecePawn.cpp" />
+    <ClCompile Include="pieceQueen.cpp" />
+    <ClCompile Include="pieceRook.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testBoard.cpp" />
@@ -125,6 +127,9 @@
     <ClInclude Include="pieceRook.h" />
     <ClInclude Include="pieceSpace.h" />
     <ClInclude Include="pieceType.h" />
+	<ClInclude Include="pieceKing.h" />
+	<ClInclude Include="piecePawn.h" />
+	<ClInclude Include="pieceBishop.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testBoard.h" />
     <ClInclude Include="testKnight.h" />

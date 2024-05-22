@@ -108,4 +108,3 @@ void Piece::setPosition(const Position & pos)
 void Piece::getMoves(set <Move> & movesSet, const Board & board) const
 {
 }
-
