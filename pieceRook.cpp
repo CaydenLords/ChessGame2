@@ -29,5 +29,5 @@ void Rook::display(ogstream* pgout) const
  *********************************************/
 void Rook::getMoves(set <Move>& moves, const Board& board) const
 {
-
+   this->straightMoves(moves,board);
 }

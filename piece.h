@@ -81,6 +81,7 @@ public:
    virtual void display(ogstream * pgout)                         const = 0;
    void getMoves(set <Move> & moves, const Board & board) const;
    virtual void diagonalMoves(set <Move>& moves, const Board& board) const;
+   virtual void straightMoves(set <Move>& moves, const Board& board) const;
 
 
 protected:
