@@ -52,11 +52,15 @@ void TestRook::getMoves_blocked()
    assertUnit(moves.size() == 0);  // no possible moves
 
    // TEARDOWN
-   board.board[2][1] = nullptr; // white Bishop
+   board.board[2][1] = nullptr; // white Rook
    board.board[2][2] = nullptr; // white pawn
    board.board[2][0] = nullptr; // white pawn
    board.board[1][1] = nullptr; // white pawn
    board.board[3][1] = nullptr; // white pawn
+   board.board[1][0] = nullptr; // white pawn
+   board.board[3][0] = nullptr; // white pawn
+   board.board[0][3] = nullptr; // white pawn
+   board.board[7][6] = nullptr; // white pawn
    moves.clear();
 }
 
@@ -105,7 +109,7 @@ void TestRook::getMoves_slideToEnd()
    assertUnit(moves.find(Move("c2h2")) != moves.end());
 
    // TEARDOWN
-   board.board[2][1] = nullptr; // white Bishop
+   board.board[2][1] = nullptr; // white Rook
    moves.clear();
 }
 
@@ -161,7 +165,7 @@ void TestRook::getMoves_slideToBlock()
 
 
    // TEARDOWN
-   board.board[2][1] = nullptr; // white Bishop
+   board.board[2][1] = nullptr; // white Rook
    board.board[0][2] = nullptr; // white pawn
    board.board[2][0] = nullptr; // white pawn
    board.board[7][2] = nullptr; // white pawn
@@ -221,7 +225,7 @@ void TestRook::getMoves_slideToCapture()
    assertUnit(moves.find(Move("c2c8p")) != moves.end());
 
    // TEARDOWN
-   board.board[2][1] = nullptr; // white Bishop
+   board.board[2][1] = nullptr; // white Rook
    board.board[0][2] = nullptr; // black pawn
    board.board[2][0] = nullptr; // black pawn
    board.board[7][2] = nullptr; // black pawn

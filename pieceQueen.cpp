@@ -29,5 +29,6 @@ void Queen::display(ogstream* pgout) const
  *********************************************/
 void Queen::getMoves(set <Move>& moves, const Board& board) const
 {
-
+   this->diagonalMoves(moves, board);
+   this->straightMoves(moves, board);
 }

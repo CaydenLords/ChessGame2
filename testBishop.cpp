@@ -209,10 +209,10 @@ void TestBishop::getMoves_slideToCapture()
 
    // TEARDOWN
    board.board[2][1] = nullptr; // white Bishop
-   board.board[1][0] = nullptr; // white pawn
-   board.board[3][0] = nullptr; // white pawn
-   board.board[0][3] = nullptr; // white pawn
-   board.board[7][6] = nullptr; // white pawn
+   board.board[1][0] = nullptr; // black pawn
+   board.board[3][0] = nullptr; // black pawn
+   board.board[0][3] = nullptr; // black pawn
+   board.board[7][6] = nullptr; // black pawn
    moves.clear();
 }
 
