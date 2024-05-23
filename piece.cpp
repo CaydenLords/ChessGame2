@@ -190,6 +190,10 @@ void Piece::straightMoves(set <Move>& moves, const Board& board) const {
       }
    }
 }
+/************************************************
+ * PIECE : GET KNIGHT MOVES
+ * Iterate through all of the l-shaped moves the piece could make
+ ***********************************************/
 void Piece::knightMoves(set <Move>& moves, const Board& board) const {
    // List of Possible moves
    Delta possibleMoves[8] =
@@ -217,6 +221,11 @@ void Piece::knightMoves(set <Move>& moves, const Board& board) const {
       }
    }
 }
+
+/************************************************
+ * PIECE : GET KING MOVES
+ * Iterate through all of the one space moves
+ ***********************************************/
 void Piece::kingMoves(set <Move>& moves, const Board& board) const {
    Delta possibleMoves[8] =
    {
@@ -241,44 +250,34 @@ void Piece::kingMoves(set <Move>& moves, const Board& board) const {
    }
 }
 
+/************************************************
+ * PIECE : CASTLING MOVES
+ * See if the piece can castle
+ ***********************************************/
 void Piece::castlingMoves(set <Move>& moves, const Board& board) const {
    Delta possibleMoves[8] =
    {
       {0, -4},  {0, 3},
    };
+   // Has the king moved? 
    if (isMoved() == false) {
-      if (isWhite()) {
-         for (int i = 0; i < 2; i++) {
-            Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
-            if (pos.isValid()) {
-               if (board[pos].getType() == ROOK) {
-                  if (board[pos].isMoved() == false) {
-                     if (board[pos].isWhite()) {
-                        if (i == 0) {
-                           moves.insert(Move(position, pos, SPACE).getText() + 'C');
-                        }
-                        else {
-                           moves.insert(Move(position, pos, SPACE).getText() + 'c');
-                        }
+      // Check each side
+      for (int i = 0; i < 2; i++) {
+         Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
+         // Is the position we're looking at valid? 
+         if (pos.isValid()) {
+            // Is the valid position a rook? 
+            if (board[pos].getType() == ROOK) {
+               // Has the rook moved? 
+               if (board[pos].isMoved() == false) {
+                  // Are the rook and king the same color? 
+                  if (board[pos].isWhite() == isWhite()) {
+                     // Display based on king or queen side. 
+                     if (i == 0) {
+                        moves.insert(Move(position, pos, SPACE).getText() + 'C');
                      }
-                  }
-               }
-            }
-         }
-      }
-      else {
-         for (int i = 0; i < 2; i++) {
-            Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
-            if (pos.isValid()) {
-               if (board[pos].getType() == ROOK) {
-                  if (board[pos].isMoved() == false) {
-                     if (board[pos].isWhite() == false) {
-                        if (i == 0) {
-                           moves.insert(Move(position, pos, SPACE).getText() + 'C');
-                        }
-                        else {
-                           moves.insert(Move(position, pos, SPACE).getText() + 'c');
-                        }
+                     else {
+                        moves.insert(Move(position, pos, SPACE).getText() + 'c');
                      }
                   }
                }
