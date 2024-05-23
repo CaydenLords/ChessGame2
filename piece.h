@@ -82,6 +82,10 @@ public:
    void getMoves(set <Move> & moves, const Board & board) const;
    virtual void diagonalMoves(set <Move>& moves, const Board& board) const;
    virtual void straightMoves(set <Move>& moves, const Board& board) const;
+   virtual void kingMoves(set <Move>& moves, const Board& board) const;
+   virtual void castlingMoves(set <Move>& moves, const Board& board) const;
+   virtual void knightMoves(set <Move>& moves, const Board& board) const;
+
 
 
 protected:
@@ -236,6 +240,7 @@ public:
    White() : PieceDummy(), pt(ROOK) {}
    White(PieceType pt) : PieceDummy(), pt(pt) {}
    bool isWhite() const { return true; }
+   bool isMoved() const { return false; }
    PieceType getType() const { return pt; }
    void getMoves(set <Move>& moves, const Board& board) const { }
 };
@@ -247,6 +252,7 @@ public:
    Black() : PieceDummy(), pt(ROOK) {}
    Black(PieceType pt) : PieceDummy(), pt(pt) {}
    bool isWhite() const { return false; }
+   bool isMoved() const { return false; }
    PieceType getType() const { return pt; }
    void getMoves(set <Move>& moves, const Board& board) const { }
 };

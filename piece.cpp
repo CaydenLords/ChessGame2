@@ -115,7 +115,7 @@ void Piece::getMoves(set <Move> & movesSet, const Board & board) const
  ***********************************************/
 void Piece::diagonalMoves(set <Move>& moves, const Board& board) const{
    // List of Possible moves
-   Delta possibleMoves[8] =
+   Delta possibleMoves[4] =
    {
    { -1, 1},          { 1,  1},
 
@@ -156,7 +156,7 @@ void Piece::diagonalMoves(set <Move>& moves, const Board& board) const{
  ***********************************************/
 void Piece::straightMoves(set <Move>& moves, const Board& board) const {
    // List of Possible moves
-   Delta possibleMoves[8] =
+   Delta possibleMoves[4] =
    {
              { 0, 1},          
    { -1,  0},         { 1, 0},         
@@ -186,6 +186,103 @@ void Piece::straightMoves(set <Move>& moves, const Board& board) const {
          }
          else {
             continueSlide = false;
+         }
+      }
+   }
+}
+void Piece::knightMoves(set <Move>& moves, const Board& board) const {
+   // List of Possible moves
+   Delta possibleMoves[8] =
+   {
+            {-1,  2}, { 1,  2},
+   {-2,  1},                    { 2,  1},
+   {-2, -1},                    { 2, -1},
+            {-1, -2}, { 1, -2}
+   };
+
+   // For each possible move
+   for (int i = 0; i < 8; i++)
+   {
+      Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
+      // Check that it's valid
+      if (pos.isValid()) {
+         // Check whether it's a space
+         if (board[pos].getType() == SPACE) {
+            moves.insert(Move(position, pos, SPACE));
+         }
+         // Otherwise, check if it's a capturable piece
+         else if (board[pos].isWhite() != isWhite()) {
+            moves.insert(Move(position, pos, board[pos].getType()));
+         }
+      }
+   }
+}
+void Piece::kingMoves(set <Move>& moves, const Board& board) const {
+   Delta possibleMoves[8] =
+   {
+      {-1, 1},  { 0, 1}, { 1, 1},
+      {-1, 0},           { 1, 0},
+      {-1,-1}, { 0, -1}, { 1,-1}
+   };
+   for (int i = 0; i < 8; i++)
+   {
+      Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
+      // Check that it's valid
+      if (pos.isValid()) {
+         // Check whether it's a space
+         if (board[pos].getType() == SPACE) {
+            moves.insert(Move(position, pos, SPACE));
+         }
+         // Otherwise, check if it's a capturable piece
+         else if (board[pos].isWhite() != isWhite()) {
+            moves.insert(Move(position, pos, board[pos].getType()));
+         }
+      }
+   }
+}
+
+void Piece::castlingMoves(set <Move>& moves, const Board& board) const {
+   Delta possibleMoves[8] =
+   {
+      {0, -4},  {0, 3},
+   };
+   if (isMoved() == false) {
+      if (isWhite()) {
+         for (int i = 0; i < 2; i++) {
+            Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
+            if (pos.isValid()) {
+               if (board[pos].getType() == ROOK) {
+                  if (board[pos].isMoved() == false) {
+                     if (board[pos].isWhite()) {
+                        if (i == 0) {
+                           moves.insert(Move(position, pos, SPACE).getText() + 'C');
+                        }
+                        else {
+                           moves.insert(Move(position, pos, SPACE).getText() + 'c');
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+      else {
+         for (int i = 0; i < 2; i++) {
+            Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
+            if (pos.isValid()) {
+               if (board[pos].getType() == ROOK) {
+                  if (board[pos].isMoved() == false) {
+                     if (board[pos].isWhite() == false) {
+                        if (i == 0) {
+                           moves.insert(Move(position, pos, SPACE).getText() + 'C');
+                        }
+                        else {
+                           moves.insert(Move(position, pos, SPACE).getText() + 'c');
+                        }
+                     }
+                  }
+               }
+            }
          }
       }
    }

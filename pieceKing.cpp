@@ -29,5 +29,6 @@ void King::display(ogstream* pgout) const
  *********************************************/
 void King::getMoves(set <Move>& moves, const Board& board) const
 {
-
+   this->castlingMoves(moves, board);
+   this->kingMoves(moves, board);
 }
