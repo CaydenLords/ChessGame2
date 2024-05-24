@@ -85,7 +85,16 @@ public:
    virtual void kingMoves(set <Move>& moves, const Board& board) const;
    virtual void castlingMoves(set <Move>& moves, const Board& board) const;
    virtual void knightMoves(set <Move>& moves, const Board& board) const;
-
+   virtual void pawnSimpleWhiteMove(set <Move>& moves, const Board& board) const;
+   virtual void pawnSimpleBlackMove(set <Move>& moves, const Board& board) const;
+   virtual void pawnWhiteDoubleMove(set <Move>& moves, const Board& board) const;
+   virtual void pawnBlackDoubleMove(set <Move>& moves, const Board& board) const;
+   virtual void pawnWhiteCaptureBlack(set <Move>& moves, const Board& board) const;
+   virtual void pawnBlackCaptureWhite(set <Move>& moves, const Board& board) const;
+   virtual void promoteWhite(set <Move>& moves, const Board& board) const;
+   virtual void promoteBlack(set <Move>& moves, const Board& board) const;
+   virtual void enPassantWhite(set <Move>& moves, const Board& board) const;
+   virtual void enPassantBlack(set <Move>& moves, const Board& board) const;
 
 
 protected:

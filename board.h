@@ -132,5 +132,6 @@ public:
          return *pSpace;
    }
    int  getCurrentMove() const { return moveNumber; }
+   void setMovesNumber(int numMoves);
 };
 

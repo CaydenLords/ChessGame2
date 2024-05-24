@@ -170,12 +170,18 @@ void Board::assertBoard()
 
 }
 
-
-
+/**********************************************
+ * BOARD : SET NUM MOVES - FOR TESTING
+ *         Set the move number the board is on
+ *********************************************/
+void BoardEmpty::setMovesNumber(int numMoves)
+{
+   moveNumber = numMoves;
+}
 
 /**********************************************
  * BOARD : MOVE
- *         Execute a move according to the contained instructions
+ *         Execute a move according to the obtained instructions
  *   INPUT move The instructions of the move
  *********************************************/
 void Board::move(const Move & move)

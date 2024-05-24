@@ -29,5 +29,19 @@ void Pawn::display(ogstream* pgout) const
  *********************************************/
 void Pawn::getMoves(set <Move>& moves, const Board& board) const
 {
-
+   if (this->fWhite == true)
+   {
+      this->pawnSimpleWhiteMove(moves, board);
+      this->pawnWhiteDoubleMove(moves, board);
+      this->pawnWhiteCaptureBlack(moves, board);
+      this->enPassantWhite(moves, board);
+   }
+   else
+   {
+      this->pawnSimpleBlackMove(moves, board);
+      this->pawnBlackDoubleMove(moves, board);
+      this->pawnBlackCaptureWhite(moves, board);
+      this->enPassantBlack(moves, board);
+   }
+   
 }
