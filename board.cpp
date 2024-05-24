@@ -2,7 +2,7 @@
  * Source File:
  *    BOARD 
  * Author:
- *    <your name here>
+ *   Ryan Donaldson and Cayden Lords
  * Summary:
  *    A collection of pieces and a small amount of game state
  ************************************************************************/
@@ -201,6 +201,26 @@ void Board::move(const Move & move)
    {
       delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
       board[move.dest.getCol()][move.source.getRow()] = new PieceDummy;
+   }
+
+   // for king-side castling
+   if (move.moveType == Move::CASTLE_KING)
+   {
+      // Fetch the rook
+      Piece* rook = board[move.source.getCol() + 3][move.source.getRow()];
+      // Move the rook
+      board[move.source.getCol() + 1][move.source.getRow()] = rook;
+      board[move.source.getCol() + 3][move.source.getRow()] = new PieceDummy;
+   }
+
+   // for queen-side castling
+   if (move.moveType == Move::CASTLE_QUEEN)
+   {
+      // fetch the rook
+      Piece* rook = board[move.source.getCol() - 4][move.source.getRow()];
+      // move the rook
+      board[move.source.getCol() - 1][move.source.getRow()] = rook;
+      board[move.source.getCol() - 4][move.source.getRow()] = new PieceDummy;
    }
 
    // Update the piece's position
