@@ -2,7 +2,7 @@
  * Source File:
  *    TEST PAWN
  * Author:
- *    <your name here>
+ *    Ryan Donaldson
  * Summary:
  *    The unit tests for the pawn
  ************************************************************************/
@@ -391,11 +391,11 @@ void TestPawn::getMoves_enpassantBlack()
 
 /*************************************
  * GET MOVES TEST Promotion
- * Promotion: b7a8rQ
+ * Promotion: b7a8rq
  *
  * +---a-b-c-d-e-f-g-h---+
  * |                     |
- * 8   r . r             8
+ * 8   R . R             8
  * 7    (p)              7
  * 6                     6
  * 5                     5
@@ -421,9 +421,9 @@ void TestPawn::getMoves_promotionWhite()
    pawn.getMoves(moves, board);
    // VERIFY
    assertUnit(moves.size() == 3);
-   assertUnit(moves.find(Move("b7b8Q")) != moves.end());
-   assertUnit(moves.find(Move("b7a8rQ")) != moves.end());
-   assertUnit(moves.find(Move("b7c8rQ")) != moves.end());
+   assertUnit(moves.find(Move("b7b8q")) != moves.end());
+   assertUnit(moves.find(Move("b7a8Rq")) != moves.end());
+   assertUnit(moves.find(Move("b7c8Rq")) != moves.end());
    // TAKEDOWN
    board.board[1][6] = nullptr;
    board.board[0][7] = nullptr;

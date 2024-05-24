@@ -191,9 +191,36 @@ void Board::move(const Move & move)
    board[move.dest.getCol()][move.dest.getRow()] = pPiece;
    board[move.source.getCol()][move.source.getRow()] = new PieceDummy;
 
+   // for En Passant moves
+   if (move.isWhite == true && move.moveType == Move::ENPASSANT)
+   {
+      delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
+      board[move.dest.getCol()][move.source.getRow()] = new PieceDummy;
+   }
+   else if (move.isWhite == false && move.moveType == Move::ENPASSANT)
+   {
+      delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
+      board[move.dest.getCol()][move.source.getRow()] = new PieceDummy;
+   }
+
    // Update the piece's position
    pPiece->setPosition(move.dest);
 
+   // for promotion moves
+   if (move.isWhite == true && move.promote == QUEEN)
+   {
+      delete board[move.dest.getCol()][move.dest.getRow()]; // Remove the pawn to be promoted
+      board[move.dest.getCol()][move.dest.getRow()] = new Queen(Position(move.dest.getCol(), move.dest.getRow()), true);
+      pPiece = board[move.dest.getCol()][move.dest.getRow()];
+
+   }
+   else if (move.isWhite == false && move.promote == QUEEN)
+   {
+      delete board[move.dest.getCol()][move.dest.getRow()]; // Remove the pawn to be promoted
+      board[move.dest.getCol()][move.dest.getRow()] = new Queen(Position(move.dest.getCol(), move.dest.getRow()), false);
+      pPiece = board[move.dest.getCol()][move.dest.getRow()];
+   }
+ 
    pPiece->incrementNMoves();
    numMoves++;
 
