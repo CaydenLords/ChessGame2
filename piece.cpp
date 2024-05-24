@@ -125,23 +125,29 @@ void Piece::diagonalMoves(set <Move>& moves, const Board& board) const{
       Position pos = position;
       bool continueSlide = true;
       // Check that it's valid
-      while (continueSlide) {
+      while (continueSlide) 
+      {
             pos = Position(pos.getCol() + possibleMoves[i].dCol, pos.getRow() + possibleMoves[i].dRow);
-            if (pos.isValid()) {
+            if (pos.isValid()) 
+            {
                // Check whether it's a space
-               if (board[pos].getType() == SPACE) {
+               if (board[pos].getType() == SPACE) 
+               {
                   moves.insert(Move(position, pos, SPACE));
                }
                // Otherwise, check if it's a capturable piece
-               else if (board[pos].isWhite() != isWhite()) {
+               else if (board[pos].isWhite() != isWhite()) 
+               {
                   moves.insert(Move(position, pos, board[pos].getType()));
                   continueSlide = false;
                }
-               else {
+               else 
+               {
                   continueSlide = false;
                }
             }
-            else {
+            else 
+            {
                continueSlide = false;
             }
       }
@@ -166,23 +172,29 @@ void Piece::straightMoves(set <Move>& moves, const Board& board) const {
       Position pos = position;
       bool continueSlide = true;
       // Check that it's valid
-      while (continueSlide) {
+      while (continueSlide) 
+      {
          pos = Position(pos.getCol() + possibleMoves[i].dCol, pos.getRow() + possibleMoves[i].dRow);
-         if (pos.isValid()) {
+         if (pos.isValid()) 
+         {
             // Check whether it's a space
-            if (board[pos].getType() == SPACE) {
+            if (board[pos].getType() == SPACE) 
+            {
                moves.insert(Move(position, pos, SPACE));
             }
             // Otherwise, check if it's a capturable piece
-            else if (board[pos].isWhite() != isWhite()) {
+            else if (board[pos].isWhite() != isWhite()) 
+            {
                moves.insert(Move(position, pos, board[pos].getType()));
                continueSlide = false;
             }
-            else {
+            else 
+            {
                continueSlide = false;
             }
          }
-         else {
+         else 
+         {
             continueSlide = false;
          }
       }
@@ -192,7 +204,8 @@ void Piece::straightMoves(set <Move>& moves, const Board& board) const {
  * PIECE : GET KNIGHT MOVES
  * Iterate through all of the l-shaped moves the piece could make
  ***********************************************/
-void Piece::knightMoves(set <Move>& moves, const Board& board) const {
+void Piece::knightMoves(set <Move>& moves, const Board& board) const 
+{
    // List of Possible moves
    Delta possibleMoves[8] =
    {
@@ -207,13 +220,16 @@ void Piece::knightMoves(set <Move>& moves, const Board& board) const {
    {
       Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
       // Check that it's valid
-      if (pos.isValid()) {
+      if (pos.isValid()) 
+      {
          // Check whether it's a space
-         if (board[pos].getType() == SPACE) {
+         if (board[pos].getType() == SPACE) 
+         {
             moves.insert(Move(position, pos, SPACE));
          }
          // Otherwise, check if it's a capturable piece
-         else if (board[pos].isWhite() != isWhite()) {
+         else if (board[pos].isWhite() != isWhite()) 
+         {
             moves.insert(Move(position, pos, board[pos].getType()));
          }
       }
@@ -224,7 +240,8 @@ void Piece::knightMoves(set <Move>& moves, const Board& board) const {
  * PIECE : GET KING MOVES
  * Iterate through all of the one space moves
  ***********************************************/
-void Piece::kingMoves(set <Move>& moves, const Board& board) const {
+void Piece::kingMoves(set <Move>& moves, const Board& board) const 
+{
    Delta possibleMoves[8] =
    {
       {-1, 1},  { 0, 1}, { 1, 1},
@@ -235,13 +252,16 @@ void Piece::kingMoves(set <Move>& moves, const Board& board) const {
    {
       Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
       // Check that it's valid
-      if (pos.isValid()) {
+      if (pos.isValid()) 
+      {
          // Check whether it's a space
-         if (board[pos].getType() == SPACE) {
+         if (board[pos].getType() == SPACE) 
+         {
             moves.insert(Move(position, pos, SPACE));
          }
          // Otherwise, check if it's a capturable piece
-         else if (board[pos].isWhite() != isWhite()) {
+         else if (board[pos].isWhite() != isWhite()) 
+         {
             moves.insert(Move(position, pos, board[pos].getType()));
          }
       }
@@ -252,29 +272,38 @@ void Piece::kingMoves(set <Move>& moves, const Board& board) const {
  * PIECE : CASTLING MOVES
  * See if the piece can castle
  ***********************************************/
-void Piece::castlingMoves(set <Move>& moves, const Board& board) const {
+void Piece::castlingMoves(set <Move>& moves, const Board& board) const 
+{
    Delta possibleMoves[8] =
    {
       {0, -4},  {0, 3},
    };
    // Has the king moved? 
-   if (isMoved() == false) {
+   if (isMoved() == false)
+   {
       // Check each side
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 2; i++) 
+      {
          Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
          // Is the position we're looking at valid? 
-         if (pos.isValid()) {
+         if (pos.isValid()) 
+         {
             // Is the valid position a rook? 
-            if (board[pos].getType() == ROOK) {
+            if (board[pos].getType() == ROOK) 
+            {
                // Has the rook moved? 
-               if (board[pos].isMoved() == false) {
+               if (board[pos].isMoved() == false) 
+               {
                   // Are the rook and king the same color? 
-                  if (board[pos].isWhite() == isWhite()) {
+                  if (board[pos].isWhite() == isWhite())
+                  {
                      // Display based on king or queen side. 
-                     if (i == 0) {
+                     if (i == 0) 
+                     {
                         moves.insert(Move(position, pos, SPACE).getText() + 'C');
                      }
-                     else {
+                     else
+                     {
                         moves.insert(Move(position, pos, SPACE).getText() + 'c');
                      }
                   }
