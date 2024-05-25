@@ -574,7 +574,7 @@ void Piece::enPassantWhite(set<Move>& moves, const Board& board) const
    Position posRight(position.getCol() + 1, position.getRow());
    if (posLeft.isValid() && board[posLeft].getType() != SPACE)
    {
-      if (board[posLeft].getType() == PAWN && !board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()))
+      if (board[posLeft].getType() == PAWN && !board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
@@ -598,7 +598,7 @@ void Piece::enPassantWhite(set<Move>& moves, const Board& board) const
    }
    if (posRight.isValid() && board[posRight].getType() != SPACE)
    {
-      if (board[posRight].getType() == PAWN && !board[posRight].isWhite() && board[posRight].justMoved(board.getCurrentMove()))
+      if (board[posRight].getType() == PAWN && !board[posRight].isWhite() && board[posRight].justMoved(board.getCurrentMove()) && board[posRight].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
@@ -639,7 +639,7 @@ void Piece::enPassantBlack(set<Move>& moves, const Board& board) const
    Position posRight(position.getCol() + 1, position.getRow());
    if (posLeft.isValid() && board[posLeft].getType() != SPACE)
    {
-      if (board[posLeft].getType() == PAWN && board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()))
+      if (board[posLeft].getType() == PAWN && board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
@@ -663,7 +663,7 @@ void Piece::enPassantBlack(set<Move>& moves, const Board& board) const
    }
    if (posRight.isValid() && board[posRight].getType() != SPACE)
    {
-      if (board[posRight].getType() == PAWN && board[posRight].isWhite() && board[posRight].justMoved(board.getCurrentMove()))
+      if (board[posRight].getType() == PAWN && board[posRight].isWhite() && board[posRight].justMoved(board.getCurrentMove()) && board[posRight].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
