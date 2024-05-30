@@ -319,6 +319,7 @@ void TestPawn::getMoves_enpassantWhite()
    
    pawnW.incrementNMoves(); // To know the white pawn isn't in starting position
    pawnB3.incrementNMoves(); // To know the black pawn B3 has moved already
+   pawnB3.incrementNMoves();
    board.setMovesNumber(4); // Simulate the board being on white's turn
    pawnB1.setLastMove(board.getCurrentMove()); // Set move number for pawnB1 pretending it just moved forward
    // increment the boards current move number after black's 'move'
@@ -371,11 +372,12 @@ void TestPawn::getMoves_enpassantBlack()
 
    pawnB.incrementNMoves(); // To know the black pawn isn't in starting position
    pawnW1.incrementNMoves(); // To know the first white pawn has moved
+   pawnW1.incrementNMoves();
    board.setMovesNumber(5); // Simulate the board being on black's turn
    pawnW3.setLastMove(board.getCurrentMove()); // Pretend the third white pawn just double moved
    // Increment the board's move number after white's 'move'
    board.setMovesNumber(6);
-
+   
    // EXERCISE
    pawnB.getMoves(moves, board);
    // VERIFY
