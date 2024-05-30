@@ -49,7 +49,7 @@ public:
    // getters
    virtual int  getCurrentMove() const;
    virtual bool whiteTurn()      const;
-   virtual void display(const Position& posHover, const Position& posSelect) const;
+   virtual void display(const Position& posHover, const Position& posSelect, set <Move> possible) const;
    virtual const Piece& operator [] (const Position& pos) const;
 
    // setters
@@ -63,6 +63,7 @@ protected:
 
    Piece * board[8][8];    // the board of chess pieces
    int numMoves;
+   Space space = Space(0,0);
 
    ogstream* pgout;
 };

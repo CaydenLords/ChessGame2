@@ -41,8 +41,8 @@ public:
 		source = Position(srcChars.c_str());
 		dest = Position(destChars.c_str());
 
-		source = Position(source.getCol(), source.getRow());
-		dest = Position(dest.getCol(), dest.getRow());
+		//source = Position(source.getCol(), source.getRow());
+		//dest = Position(dest.getCol(), dest.getRow());
 
 		if (size(text) == 4)
 		{

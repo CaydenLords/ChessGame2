@@ -91,6 +91,11 @@ Piece& Board::operator [] (const Position& pos)
    int col = pos.getCol();
    int row = pos.getRow();
 
+
+   if (board[col][row] == nullptr) {
+      space = Space(col, row);
+      return space;
+   }
    return *(board[col][row]);
 }
 
@@ -98,11 +103,17 @@ Piece& Board::operator [] (const Position& pos)
  * BOARD : DISPLAY
  *         Display the board
  ***********************************************/
-void Board::display(const Position & posHover, const Position & posSelect) const
+void Board::display(const Position & posHover, const Position & posSelect, set <Move> possible) const
 {
    ogstream stream;
 
-   // draw the board and knights
+   // draw any selections
+   stream.drawHover(posHover);
+   stream.drawSelected(posSelect);
+   for (Move item: possible) {
+      stream.drawPossible(item.dest);
+    }
+   //draw the board
    stream.drawBoard();
    for (int r = 0; r < 8; r++)
       for (int c = 0; c < 8; c++)

@@ -42,8 +42,8 @@ void TestMove::constructString_simple()
    Move move("e5e6");
    // EXERCISE
    // VERIFY
-   assertUnit(move.source == (4, 4));
-   assertUnit(move.dest == (2, 5));
+   assertUnit(move.source == Position(4, 4));
+   assertUnit(move.dest == Position(2, 5));
    assertUnit(move.moveType == 0);
    // TAKEDOWN
 }
@@ -61,8 +61,8 @@ void TestMove::read_simple()
    Move move("e5d6");
    // EXERCISE
    // VERIFY
-   assertUnit(move.source == (4, 4));
-   assertUnit(move.dest == (4, 5));
+   assertUnit(move.source == Position(4, 4));
+   assertUnit(move.dest == Position(4, 5));
    assertUnit(move.moveType == Move::MoveType::MOVE);
    // TAKEDOWN
 }
@@ -81,8 +81,8 @@ void TestMove::read_capture()
    Move move("e5d6r");
    // EXERCISE
    // VERIFY
-   assertUnit(move.source == (4, 4));
-   assertUnit(move.dest == (4, 5));
+   assertUnit(move.source == Position(4, 4));
+   assertUnit(move.dest == Position(4, 5));
    assertUnit(move.moveType == Move::MoveType::MOVE);
    assertUnit(move.capture == PieceType::ROOK);
    // TAKEDOWN
@@ -101,8 +101,8 @@ void TestMove::read_enpassant()
    Move move("e5d6E");
    // EXERCISE
    // VERIFY
-   assertUnit(move.source == (4, 4));
-   assertUnit(move.dest == (5, 5));
+   assertUnit(move.source == Position(4, 4));
+   assertUnit(move.dest == Position(5, 5));
    assertUnit(move.moveType == Move::MoveType::ENPASSANT);
    // TAKEDOWN
 }
@@ -120,8 +120,8 @@ void TestMove::read_castleKing()
    Move move("e1g1c");
    // EXERCISE
    // VERIFY
-   assertUnit(move.source == (4, 0));
-   assertUnit(move.dest == (6, 0));
+   assertUnit(move.source == Position(4, 0));
+   assertUnit(move.dest == Position(6, 0));
    assertUnit(move.moveType == Move::MoveType::CASTLE_KING);
    // TAKEDOWN
 }
@@ -140,8 +140,8 @@ void TestMove::read_castleQueen()
    Move move("e1c1C");
    // EXERCISE
    // VERIFY
-   assertUnit(move.source == (4, 0));
-   assertUnit(move.dest == (2, 0));
+   assertUnit(move.source == Position(4, 0));
+   assertUnit(move.dest == Position(2, 0));
    assertUnit(move.moveType == Move::MoveType::CASTLE_QUEEN);
    // TAKEDOWN
 }
@@ -159,8 +159,8 @@ void TestMove::assign_simple()
    // EXERCISE
    Move move = Move("e5e6");
    // VERIFY
-   assertUnit(move.source == (4, 0));
-   assertUnit(move.dest == (2, 0));
+   assertUnit(move.source == Position(4, 0));
+   assertUnit(move.dest == Position(2, 0));
    assertUnit(move.moveType == Move::MoveType::MOVE);
    // TAKEDOWN
 }
@@ -179,8 +179,8 @@ void TestMove::assign_capture()
    // EXERCISE
    Move move = Move("e5d6r");
    // VERIFY
-   assertUnit(move.source == (4, 4));
-   assertUnit(move.dest == (4, 5));
+   assertUnit(move.source == Position(4, 4));
+   assertUnit(move.dest == Position(4, 5));
    assertUnit(move.moveType == Move::MoveType::MOVE);
    assertUnit(move.capture == PieceType::ROOK);
    // TAKEDOWN
@@ -199,8 +199,8 @@ void TestMove::assign_enpassant()
    // EXERCISE
    Move move = Move("e5d6E");
    // VERIFY
-   assertUnit(move.source == (4, 4));
-   assertUnit(move.dest == (5, 5));
+   assertUnit(move.source == Position(4, 4));
+   assertUnit(move.dest == Position(5, 5));
    assertUnit(move.moveType == Move::MoveType::ENPASSANT);
    // TAKEDOWN
 }

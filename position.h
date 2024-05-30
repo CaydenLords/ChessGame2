@@ -11,6 +11,7 @@
 
 #include <string>
 #include <cstdint>
+#include <cassert>
 using std::string;
 using std::ostream;
 using std::istream;
@@ -115,9 +116,13 @@ public:
    // Pixels:    The Position class can work with screen coordinates,
    //            a.k.a. Pixels, these are X and Y coordinates. Note that
    //            we need to scale them according to the size of the board.
-   int getX()   const { return 99; }
-   int getY()   const { return 99; }
-   void setXY(double x, double y) { }
+   int getX()   const { return getCol()*32+50; }
+   int getY()   const { return getRow()*32+50; }
+   void setXY(double x, double y) 
+   { 
+      setCol((x - 50) / 32);
+      setRow(abs(8-(y - 50) / 32));
+   }
    double getSquareWidth()  const { return SIZE_SQUARE; }
    double getSquareHeight() const { return SIZE_SQUARE; }
    void setSquareWidth(double width) {  }

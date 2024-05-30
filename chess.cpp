@@ -31,15 +31,34 @@ using namespace std;
  **************************************/
 void callBack(Interface *pUI, void * p)
 {
-
+   set <Move> possible;
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p; 
-
-   pBoard->display(Position(0,0), Position(0,0));
-   
+   if (pUI->getPreviousPosition().isValid() && pUI->getSelectPosition().isValid())
+   {
+      (*pBoard)[pUI->getPreviousPosition()].getMoves(possible, (*pBoard));
+      //(*pBoard)[pUI->getPreviousPosition()] - Previous Piece
+      //(*pBoard)[pUI->getSelectPosition()] - Current Piece
+      Move attemptedMove = Move(pUI->getPreviousPosition(), pUI->getSelectPosition(), (*pBoard)[pUI->getSelectPosition()].getType());
+      if (possible.find(attemptedMove) != possible.end())
+      {
+         pBoard->move(attemptedMove);
+         pUI->clearSelectPosition();
+      }
+   }
+   else {
+      (*pBoard)[pUI->getSelectPosition()].getMoves(possible, (*pBoard));
+   }
+   if (pUI->getSelectPosition().isValid())
+   {
+      if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE)
+      {
+         pUI->clearSelectPosition();
+      }
+   }
+   pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), possible);   
 }
-
 
 /*********************************
  * MAIN - Where it all begins...
