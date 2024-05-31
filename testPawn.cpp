@@ -393,7 +393,7 @@ void TestPawn::getMoves_enpassantBlack()
 
 /*************************************
  * GET MOVES TEST Promotion
- * Promotion: b7a8rq
+ * Promotion: b7a8Rq
  *
  * +---a-b-c-d-e-f-g-h---+
  * |                     |

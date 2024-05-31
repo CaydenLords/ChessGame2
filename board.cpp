@@ -52,25 +52,26 @@ void Board::reset(bool fFree)
          
 
    // add pieces
-   board[0][0] = new Rook(Position(0, 0), false);
-   board[1][0] = new Knight(Position(1, 0), false);
-   board[2][0] = new Bishop(Position(2, 0), false);
-   board[3][0] = new Queen(Position(3, 0), false);
-   board[4][0] = new King(Position(4, 0), false);
-   board[5][0] = new Bishop(Position(5, 0), false);
-   board[6][0] = new Knight(Position(6, 0), false);
-   board[7][0] = new Rook(Position(7, 0), false);
-   board[0][7] = new Rook(Position(0, 7), true);
-   board[1][7] = new Knight(Position(1, 7), true);
-   board[2][7] = new Bishop(Position(2, 7), true);
-   board[3][7] = new Queen(Position(3, 7), true);
-   board[4][7] = new King(Position(4, 7), true);
-   board[5][7] = new Bishop(Position(5, 7), true);
-   board[6][7] = new Knight(Position(6, 7), true);
-   board[7][7] = new Rook(Position(7, 7), true);
-   for (int x = 0; x < 8; x++) {
-      board[x][1] = new Pawn(Position(x, 1), false);
-      board[x][6] = new Pawn(Position(x, 6), true);
+   board[0][0] = new Rook(Position(0, 0),   true);
+   board[1][0] = new Knight(Position(1, 0), true);
+   board[2][0] = new Bishop(Position(2, 0), true);
+   board[3][0] = new Queen(Position(3, 0),  true);
+   board[4][0] = new King(Position(4, 0),   true);
+   board[5][0] = new Bishop(Position(5, 0), true);
+   board[6][0] = new Knight(Position(6, 0), true);
+   board[7][0] = new Rook(Position(7, 0),   true);
+   board[0][7] = new Rook(Position(0, 7),   false);
+   board[1][7] = new Knight(Position(1, 7), false);
+   board[2][7] = new Bishop(Position(2, 7), false);
+   board[3][7] = new Queen(Position(3, 7),  false);
+   board[4][7] = new King(Position(4, 7),   false);
+   board[5][7] = new Bishop(Position(5, 7), false);
+   board[6][7] = new Knight(Position(6, 7), false);
+   board[7][7] = new Rook(Position(7, 7),   false);
+   for (int x = 0; x < 8; x++) 
+   {
+      board[x][1] = new Pawn(Position(x, 1), true);
+      board[x][6] = new Pawn(Position(x, 6), false);
    }
 }
 
@@ -226,8 +227,9 @@ void Board::move(const Move & move)
       // Fetch the rook
       Piece* rook = board[move.source.getCol() + 3][move.source.getRow()];
       // Move the rook
+      board[move.source.getCol() + 1][move.source.getRow()] = rook;
+      board[move.source.getCol() + 3][move.source.getRow()] = nullptr;
       rook->setPosition(Position(move.source.getCol() + 1, move.dest.getRow()));
-      board[move.source.getCol() + 3][move.dest.getRow()] = nullptr;
    }
 
    // for queen-side castling
@@ -236,12 +238,16 @@ void Board::move(const Move & move)
       // fetch the rook
       Piece* rook = board[move.source.getCol() - 4][move.source.getRow()];
       // move the rook
-      rook->setPosition(Position(move.source.getCol() - 1, move.source.getRow()));
+      board[move.source.getCol() - 1][move.source.getRow()] = rook;
       board[move.source.getCol() - 4][move.source.getRow()] = nullptr;
+      rook->setPosition(Position(move.source.getCol() - 1, move.source.getRow()));
    }
 
    // Update the piece's position
    pPiece->setPosition(move.dest);
+ 
+   pPiece->incrementNMoves();
+   numMoves++;
 
    // for promotion moves
    if (move.isWhite == true && move.promote == QUEEN)
@@ -257,9 +263,6 @@ void Board::move(const Move & move)
       board[move.dest.getCol()][move.dest.getRow()] = new Queen(Position(move.dest.getCol(), move.dest.getRow()), false);
       pPiece = board[move.dest.getCol()][move.dest.getRow()];
    }
- 
-   pPiece->incrementNMoves();
-   numMoves++;
 
 }
 

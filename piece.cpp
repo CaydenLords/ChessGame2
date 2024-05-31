@@ -390,11 +390,13 @@ void Piece::pawnWhiteDoubleMove(set<Move>& moves, const Board& board) const
    // Has the pawn moved?
    if (isMoved() == false)
    {
+      // get position in front of pawn
+      Position front(position.getCol(), position.getRow() + 1);
       for (int i = 0; i < 1; i++)
       {
          Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
          // Is the space directly in front empty and valid?
-         if (moves.size() != 0)
+         if (front.isValid() && board[front].getType() == SPACE)
          {
             // Is the position valid?
             if (pos.isValid())
@@ -423,11 +425,13 @@ void Piece::pawnBlackDoubleMove(set<Move>& moves, const Board& board) const
    // Has the pawn moved?
    if (isMoved() == false)
    {
+      // get position in front of pawn
+      Position front(position.getCol(), position.getRow() - 1);
       for (int i = 0; i < 1; i++)
       {
          Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
          // Is the space directly in front empty and valid?
-         if (moves.size() != 0)
+         if (front.isValid() && board[front].getType() == SPACE)
          {
             // Is the position valid?
             if (pos.isValid())

@@ -161,7 +161,7 @@ void ogstream::drawPiece(bool black, Rect rectangle[], int num) const
 
    // get ready to draw
    glBegin(GL_QUADS);
-   glColor(black ? RGB_BLACK : RGB_WHITE);
+   glColor(black ? RGB_WHITE : RGB_BLACK);
 
    // iterate through the rectangles
    for (int i = 0; i < num; i++)
