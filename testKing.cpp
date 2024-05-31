@@ -12,7 +12,8 @@
 #include "pieceKing.h"     
 #include "board.h"
 #include "uiDraw.h"
-#include <cassert>      
+#include <cassert>     
+#include <iostream>
 
 
 /*************************************
@@ -161,6 +162,7 @@ void TestKing::getMoves_free()
    BoardEmpty board;
    King king(3, 4, false /*white*/);
    king.fWhite = true;
+   king.incrementNMoves();
    king.position.set(3, 4);
    board.board[3][4] = &king;
    set <Move> moves;
@@ -204,6 +206,7 @@ void TestKing::getMoves_end()
    BoardEmpty board;
    King king(0, 0, false /*white*/);
    king.fWhite = true;
+   king.incrementNMoves();
    king.position.set(0, 0);
    board.board[0][0] = &king;
    set <Move> moves;
@@ -263,8 +266,8 @@ void TestKing::getMoves_whiteCastle()
    assertUnit(moves.size() == 4);  // a couple possible moves
    assertUnit(moves.find(Move("e1d1")) != moves.end());
    assertUnit(moves.find(Move("e1f1")) != moves.end());
-   assertUnit(moves.find(Move("e1a1c")) != moves.end());
-   assertUnit(moves.find(Move("e1h1C")) != moves.end());
+   assertUnit(moves.find(Move("e1c1C")) != moves.end());
+   assertUnit(moves.find(Move("e1g1c")) != moves.end());
 
    // TEARDOWN
    board.board[4][0] = nullptr; // white King
@@ -316,8 +319,8 @@ void TestKing::getMoves_blackCastle()
    assertUnit(moves.size() == 4);  // a couple possible moves
    assertUnit(moves.find(Move("e8d8")) != moves.end());
    assertUnit(moves.find(Move("e8f8")) != moves.end());
-   assertUnit(moves.find(Move("e8a8c")) != moves.end());
-   assertUnit(moves.find(Move("e8h8C")) != moves.end());
+   assertUnit(moves.find(Move("e8g8c")) != moves.end());
+   assertUnit(moves.find(Move("e8c8C")) != moves.end());
 
    // TEARDOWN
    board.board[4][7] = nullptr; // black King

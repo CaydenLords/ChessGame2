@@ -274,42 +274,55 @@ void Piece::kingMoves(set <Move>& moves, const Board& board) const
  ***********************************************/
 void Piece::castlingMoves(set <Move>& moves, const Board& board) const 
 {
-   Delta possibleMoves[8] =
+   Delta possibleMoves[2] =
    {
-      {0, -4},  {0, 3},
+      {0, -2},  {0, 2},
    };
    // Has the king moved? 
-   if (isMoved() == false)
+   if (board[position].isMoved() == false)
    {
+      // Get rooks assumed positions and either side of king
+      Position qRook((position.getCol() - 4), position.getRow());
+      Position kRook((position.getCol() + 3), position.getRow());
+      Position rSide((position.getCol() + 1), position.getRow());
+      Position lSide((position.getCol() - 1), position.getRow());
       // Check each side
-      for (int i = 0; i < 2; i++) 
+      for (int i = 0; i < 2; i++)
       {
          Position pos(position.getCol() + possibleMoves[i].dCol, position.getRow() + possibleMoves[i].dRow);
-         // Is the position we're looking at valid? 
-         if (pos.isValid()) 
+         
+         // Is either side valid?
+         if (rSide.isValid() || lSide.isValid() )
          {
-            // Is the valid position a rook? 
-            if (board[pos].getType() == ROOK) 
+            // Are either side of the king clear?
+            if (board[rSide].getType() == SPACE || board[lSide].getType() == SPACE)
             {
-               // Has the rook moved? 
-               if (board[pos].isMoved() == false) 
+               // Now check king's new position(s)
+               if (pos.isValid())
                {
-                  // Are the rook and king the same color? 
-                  if (board[pos].isWhite() == isWhite())
+                  if (board[pos].getType() == SPACE)
                   {
-                     // Display based on king or queen side. 
-                     if (i == 0) 
+                     // Check rooks for moved, color, actually rooks
+                     if ((board[qRook].getType() == ROOK && board[qRook].isMoved() == false && board[qRook].isWhite() == board[position].isWhite()) ||
+                        (board[kRook].getType() == ROOK && board[kRook].isMoved() == false && board[kRook].isWhite() == board[position].isWhite()))
                      {
-                        moves.insert(Move(position, pos, SPACE).getText() + 'C');
-                     }
-                     else
-                     {
-                        moves.insert(Move(position, pos, SPACE).getText() + 'c');
+                        // Decide which side based on move index
+                        if (i == 0)
+                        {
+                           moves.insert(Move(position, pos, SPACE).getText() + "C");
+                        }
+                        else
+                        {
+                           moves.insert(Move(position, pos, SPACE).getText() + "c");
+                        }
                      }
                   }
                }
+               
             }
+            
          }
+         
       }
    }
 }

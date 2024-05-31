@@ -39,7 +39,7 @@ void callBack(Interface *pUI, void * p)
    Piece& select = (*pBoard)[pUI->getSelectPosition()];
    if (pUI->getPreviousPosition().isValid() && pUI->getSelectPosition().isValid())
    {
-      previous.getMoves(possible, (*pBoard));
+      previous.getMoves(possible, *pBoard);
       //(*pBoard)[pUI->getPreviousPosition()] - Previous Piece
       //(*pBoard)[pUI->getSelectPosition()] - Current Piece
       Move attemptedMove = Move(pUI->getPreviousPosition(), pUI->getSelectPosition(), select.getType());
@@ -48,13 +48,15 @@ void callBack(Interface *pUI, void * p)
          pBoard->move(attemptedMove);
          pUI->clearSelectPosition();
       }
-      else {
+      else 
+      {
          possible.clear();
-         select.getMoves(possible, (*pBoard));
+         select.getMoves(possible, *pBoard);
       }
    }
-   else if (pUI->getSelectPosition().isValid()){
-      select.getMoves(possible, (*pBoard));
+   else if (pUI->getSelectPosition().isValid())
+   {
+      select.getMoves(possible, *pBoard);
    }
    if (pUI->getSelectPosition().isValid())
    {

@@ -226,8 +226,8 @@ void Board::move(const Move & move)
       // Fetch the rook
       Piece* rook = board[move.source.getCol() + 3][move.source.getRow()];
       // Move the rook
-      board[move.source.getCol() + 1][move.source.getRow()] = rook;
-      board[move.source.getCol() + 3][move.source.getRow()] = nullptr;
+      rook->setPosition(Position(move.source.getCol() + 1, move.dest.getRow()));
+      board[move.source.getCol() + 3][move.dest.getRow()] = nullptr;
    }
 
    // for queen-side castling
@@ -236,7 +236,7 @@ void Board::move(const Move & move)
       // fetch the rook
       Piece* rook = board[move.source.getCol() - 4][move.source.getRow()];
       // move the rook
-      board[move.source.getCol() - 1][move.source.getRow()] = rook;
+      rook->setPosition(Position(move.source.getCol() - 1, move.source.getRow()));
       board[move.source.getCol() - 4][move.source.getRow()] = nullptr;
    }
 
