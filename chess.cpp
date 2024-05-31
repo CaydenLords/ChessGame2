@@ -35,24 +35,26 @@ void callBack(Interface *pUI, void * p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p; 
+   Piece& previous = (*pBoard)[pUI->getPreviousPosition()];
+   Piece& select = (*pBoard)[pUI->getSelectPosition()];
    if (pUI->getPreviousPosition().isValid() && pUI->getSelectPosition().isValid())
    {
-      (*pBoard)[pUI->getPreviousPosition()].getMoves(possible, (*pBoard));
+      previous.getMoves(possible, (*pBoard));
       //(*pBoard)[pUI->getPreviousPosition()] - Previous Piece
       //(*pBoard)[pUI->getSelectPosition()] - Current Piece
-      Move attemptedMove = Move(pUI->getPreviousPosition(), pUI->getSelectPosition(), (*pBoard)[pUI->getSelectPosition()].getType());
+      Move attemptedMove = Move(pUI->getPreviousPosition(), pUI->getSelectPosition(), select.getType());
       if (possible.find(attemptedMove) != possible.end())
       {
          pBoard->move(attemptedMove);
          pUI->clearSelectPosition();
       }
    }
-   else {
-      (*pBoard)[pUI->getSelectPosition()].getMoves(possible, (*pBoard));
+   else if (pUI->getSelectPosition().isValid()){
+      select.getMoves(possible, (*pBoard));
    }
    if (pUI->getSelectPosition().isValid())
    {
-      if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE)
+      if (select.getType() == SPACE)
       {
          pUI->clearSelectPosition();
       }
