@@ -84,6 +84,10 @@ const Piece& Board::operator [] (const Position& pos) const
    int col = pos.getCol();
    int row = pos.getRow();
 
+   if (board[col][row] == nullptr) {
+      return space;
+   }
+
    return *(board[col][row]);
 }
 Piece& Board::operator [] (const Position& pos)
@@ -200,18 +204,18 @@ void Board::move(const Move & move)
    // Perform the move
    Piece* pPiece = board[move.source.getCol()][move.source.getRow()];
    board[move.dest.getCol()][move.dest.getRow()] = pPiece;
-   board[move.source.getCol()][move.source.getRow()] = new PieceDummy;
+   board[move.source.getCol()][move.source.getRow()] = nullptr;
 
    // for En Passant moves
    if (move.isWhite == true && move.moveType == Move::ENPASSANT)
    {
       delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
-      board[move.dest.getCol()][move.source.getRow()] = new PieceDummy;
+      board[move.dest.getCol()][move.source.getRow()] = nullptr;
    }
    else if (move.isWhite == false && move.moveType == Move::ENPASSANT)
    {
       delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
-      board[move.dest.getCol()][move.source.getRow()] = new PieceDummy;
+      board[move.dest.getCol()][move.source.getRow()] = nullptr;
    }
 
    // for king-side castling
@@ -221,7 +225,7 @@ void Board::move(const Move & move)
       Piece* rook = board[move.source.getCol() + 3][move.source.getRow()];
       // Move the rook
       board[move.source.getCol() + 1][move.source.getRow()] = rook;
-      board[move.source.getCol() + 3][move.source.getRow()] = new PieceDummy;
+      board[move.source.getCol() + 3][move.source.getRow()] = nullptr;
    }
 
    // for queen-side castling
@@ -231,7 +235,7 @@ void Board::move(const Move & move)
       Piece* rook = board[move.source.getCol() - 4][move.source.getRow()];
       // move the rook
       board[move.source.getCol() - 1][move.source.getRow()] = rook;
-      board[move.source.getCol() - 4][move.source.getRow()] = new PieceDummy;
+      board[move.source.getCol() - 4][move.source.getRow()] = nullptr;
    }
 
    // Update the piece's position
