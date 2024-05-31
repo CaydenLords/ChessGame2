@@ -48,6 +48,10 @@ void callBack(Interface *pUI, void * p)
          pBoard->move(attemptedMove);
          pUI->clearSelectPosition();
       }
+      else {
+         possible.clear();
+         select.getMoves(possible, (*pBoard));
+      }
    }
    else if (pUI->getSelectPosition().isValid()){
       select.getMoves(possible, (*pBoard));
