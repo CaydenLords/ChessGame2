@@ -60,6 +60,7 @@ void callBack(Interface *pUI, void * p)
       }
    }
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), possible);   
+   possible.clear();
 }
 
 /*********************************

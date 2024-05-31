@@ -111,14 +111,16 @@ void Board::display(const Position & posHover, const Position & posSelect, set <
 {
    ogstream stream;
 
+
+   // draw the board
+   stream.drawBoard();
    // draw any selections
    stream.drawHover(posHover);
    stream.drawSelected(posSelect);
-   for (Move item: possible) {
+   for (Move item : possible) {
       stream.drawPossible(item.dest);
-    }
-   //draw the board
-   stream.drawBoard();
+   }
+   // draw pieces 
    for (int r = 0; r < 8; r++)
       for (int c = 0; c < 8; c++)
       {
@@ -126,7 +128,7 @@ void Board::display(const Position & posHover, const Position & posSelect, set <
             board[c][r]->display(&stream);
          }
       }
-   
+
 }
 
 /***********************************************
