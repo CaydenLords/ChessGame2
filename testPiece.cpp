@@ -384,6 +384,6 @@ void TestPiece::setLastMove()
    // verify
    assertUnit(piece.fWhite == false);
    assertUnit(piece.lastMove == 6);
-   assertUnit(piece.nMoves == 3);
+   assertUnit(piece.nMoves == 2);
 }  // teardown
 

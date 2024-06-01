@@ -322,11 +322,14 @@ void TestPawn::getMoves_enpassantWhite()
    pawnB3.incrementNMoves();
    board.setMovesNumber(4); // Simulate the board being on white's turn
    pawnB1.setLastMove(board.getCurrentMove()); // Set move number for pawnB1 pretending it just moved forward
+   pawnB1.incrementNMoves();
    // increment the boards current move number after black's 'move'
    board.setMovesNumber(5);
    
+   
    // EXERCISE
    pawnW.getMoves(moves, board);
+
    // VERIFY
    assertUnit(moves.size() == 1);
    assertUnit(moves.find(Move("b5a6E")) != moves.end());
@@ -375,11 +378,13 @@ void TestPawn::getMoves_enpassantBlack()
    pawnW1.incrementNMoves();
    board.setMovesNumber(5); // Simulate the board being on black's turn
    pawnW3.setLastMove(board.getCurrentMove()); // Pretend the third white pawn just double moved
+   pawnW3.incrementNMoves();
    // Increment the board's move number after white's 'move'
    board.setMovesNumber(6);
    
    // EXERCISE
    pawnB.getMoves(moves, board);
+   for (const Move& move : moves)
    // VERIFY
    assertUnit(moves.size() == 1);
    assertUnit(moves.find(Move("f4g3E")) != moves.end());

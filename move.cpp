@@ -34,12 +34,20 @@ Move::Move(Position sourceP, Position destP, PieceType piece)
 	capture = piece;
 }
 
-Move::Move(Position sourceP, Position destP, PieceType piece, PieceType promote)
+Move::Move(Position sourceP, Position destP, PieceType piece, MoveType moveTypeP)
 {
 	source = sourceP;
 	dest = destP;
 	capture = piece;
-	Move::promote = promote;
+	moveType = moveTypeP;
+}
+
+Move::Move(Position sourceP, Position destP, PieceType piece, PieceType promoteP)
+{
+	source = sourceP;
+	dest = destP;
+	capture = piece;
+	promote = promoteP;
 }
 
 /*************************************
@@ -49,7 +57,8 @@ Move::Move(Position sourceP, Position destP, PieceType piece, PieceType promote)
  * OUTPUT
  * The piece type that corresponds to the letter.
  **************************************/
-PieceType Move::pieceTypeFromLetter(char letter) const {
+PieceType Move::pieceTypeFromLetter(char letter) const 
+{
 	switch (letter) {
 	case 'p':
 		return PAWN;
@@ -69,6 +78,10 @@ PieceType Move::pieceTypeFromLetter(char letter) const {
 		return INVALID;
 	}
 }
+Move::MoveType Move::getMoveType() const
+{
+	return moveType;
+}
 /*************************************
  * letterFromPieceType
  * INPUT:
@@ -76,7 +89,8 @@ PieceType Move::pieceTypeFromLetter(char letter) const {
  * OUTPUT
  * The letter that corresponds to the piece type.
  **************************************/
-char Move::letterFromPieceType(PieceType pt) const {
+char Move::letterFromPieceType(PieceType pt) const 
+{
 	switch (pt) {
 	case PAWN:
 		return 'p';

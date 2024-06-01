@@ -34,6 +34,7 @@ public:
    // constructor
    Move();
 	Move(Position sourceP, Position destP, PieceType piece);
+	Move(Position sourceP, Position destP, PieceType piece, MoveType moveType);
 	Move(Position sourceP, Position destP, PieceType piece, PieceType promote);
    Move(const string & rhs) {
 		text = rhs;
@@ -120,12 +121,14 @@ public:
 		}
 	}
 	string getText() const;
+	
 
 
 
 protected:
 	char letterFromPieceType(PieceType pt)     const;
 	PieceType pieceTypeFromLetter(char letter) const;
+	MoveType getMoveType() const;
 
 
 

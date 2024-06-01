@@ -203,58 +203,69 @@ void BoardEmpty::setMovesNumber(int numMoves)
  *   INPUT move The instructions of the move
  *********************************************/
 void Board::move(const Move & move)
-{  
+{ 
    // Perform the move
    Piece* pPiece = board[move.source.getCol()][move.source.getRow()];
    board[move.dest.getCol()][move.dest.getRow()] = pPiece;
    board[move.source.getCol()][move.source.getRow()] = nullptr;
 
    // for En Passant moves
-   if (move.isWhite == true && move.moveType == Move::ENPASSANT)
+   if (pPiece->isWhite() && pPiece->getType() == PAWN)
    {
-      delete board[move.dest.getCol()][move.source.getRow()+1]; // Remove the captured pawn
+      delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
       board[move.dest.getCol()][move.source.getRow()] = nullptr;
    }
-   else if (move.isWhite == false && move.moveType == Move::ENPASSANT)
+   else if (!pPiece->isWhite() && pPiece->getType() == PAWN)
    {
-      delete board[move.dest.getCol()][move.source.getRow()+1]; // Remove the captured pawn
+      delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
       board[move.dest.getCol()][move.source.getRow()] = nullptr;
    }
 
    // for king-side castling
-   if (move.moveType == Move::CASTLE_KING)
+   if (pPiece->getType() == KING)
    {
-      // Fetch the rook
-      Piece* rook = board[move.source.getCol() + 3][move.source.getRow()];
-      // Move the rook
-      board[move.source.getCol() + 1][move.source.getRow()] = rook;
-      board[move.source.getCol() + 3][move.source.getRow()] = nullptr;
-      rook->setPosition(Position(move.source.getCol() + 1, move.dest.getRow()));
+      // Check right side for null; all other logic is in piece.cpp
+      Piece* rSide = board[move.source.getCol() + 1][move.source.getRow()];
+      if (rSide == nullptr)
+      {
+         // Fetch the rook
+         Piece* rook = board[move.source.getCol() + 3][move.source.getRow()];
+         // Move the rook
+         board[move.source.getCol() + 1][move.source.getRow()] = rook;
+         board[move.source.getCol() + 3][move.source.getRow()] = nullptr;
+         rook->setPosition(Position(move.source.getCol() + 1, move.dest.getRow()));
+      }
+      
    }
-
    // for queen-side castling
-   if (move.moveType == Move::CASTLE_QUEEN)
+   if (pPiece->getType() == KING)
    {
-      // fetch the rook
-      Piece* rook = board[move.source.getCol() - 4][move.source.getRow()];
-      // move the rook
-      board[move.source.getCol() - 1][move.source.getRow()] = rook;
-      board[move.source.getCol() - 4][move.source.getRow()] = nullptr;
-      rook->setPosition(Position(move.source.getCol() - 1, move.source.getRow()));
+      // Check left side for null; all other logic is in piece.cpp
+      Piece* lSide = board[move.source.getCol() - 1][move.source.getRow()];
+      if (lSide == nullptr)
+      {
+         // fetch the rook
+         Piece* rook = board[move.source.getCol() - 4][move.source.getRow()];
+         // move the rook
+         board[move.source.getCol() - 1][move.source.getRow()] = rook;
+         board[move.source.getCol() - 4][move.source.getRow()] = nullptr;
+         rook->setPosition(Position(move.source.getCol() - 1, move.source.getRow()));
+      }
+      
    }
 
    // Update the piece's position
    pPiece->setPosition(move.dest);
 
    // for promotion moves
-   if (move.isWhite == true && move.promote == QUEEN)
+   if (pPiece->isWhite() && pPiece->getType() == PAWN && move.dest.getRow() == 7)
    {
       delete board[move.dest.getCol()][move.dest.getRow()]; // Remove the pawn to be promoted
       board[move.dest.getCol()][move.dest.getRow()] = new Queen(Position(move.dest.getCol(), move.dest.getRow()), true);
       pPiece = board[move.dest.getCol()][move.dest.getRow()];
 
    }
-   else if (move.isWhite == false && move.promote == QUEEN)
+   else if (!pPiece->isWhite() && pPiece->getType() == PAWN && move.dest.getRow() == 0)
    {
       delete board[move.dest.getCol()][move.dest.getRow()]; // Remove the pawn to be promoted
       board[move.dest.getCol()][move.dest.getRow()] = new Queen(Position(move.dest.getCol(), move.dest.getRow()), false);

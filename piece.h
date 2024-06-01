@@ -252,6 +252,7 @@ public:
    bool isMoved() const { return false; }
    PieceType getType() const { return pt; }
    void getMoves(set <Move>& moves, const Board& board) const { }
+   int nMoves{ nMoves = 0 };
 };
 
 class Black : public PieceDummy
@@ -264,6 +265,7 @@ public:
    bool isMoved() const { return false; }
    PieceType getType() const { return pt; }
    void getMoves(set <Move>& moves, const Board& board) const { }
+   int nMoves{ nMoves = 0 };
 };
 
 

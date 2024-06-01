@@ -302,18 +302,13 @@ void Piece::castlingMoves(set <Move>& moves, const Board& board) const
                   if (board[pos].getType() == SPACE)
                   {
                      // Check rooks for moved, color, actually rooks
-                     if ((board[qRook].getType() == ROOK && board[qRook].isMoved() == false && board[qRook].isWhite() == board[position].isWhite()) ||
-                        (board[kRook].getType() == ROOK && board[kRook].isMoved() == false && board[kRook].isWhite() == board[position].isWhite()))
+                     if ((board[qRook].getType() == ROOK && board[qRook].nMoves == 0 && board[qRook].isWhite() == board[position].isWhite()))
                      {
-                        // Decide which side based on move index
-                        if (i == 0)
-                        {
-                           moves.insert(Move(position, pos, SPACE).getText() + "C");
-                        }
-                        else
-                        {
-                           moves.insert(Move(position, pos, SPACE).getText() + "c");
-                        }
+                        moves.insert(Move(position, pos, SPACE, Move::MoveType::CASTLE_QUEEN).getText() + 'C');
+                     }
+                     else if ((board[kRook].getType() == ROOK && board[kRook].nMoves == 0 && board[kRook].isWhite() == board[position].isWhite()))
+                     {
+                        moves.insert(Move(position, pos, SPACE, Move::MoveType::CASTLE_KING).getText() + 'c');
                      }
                   }
                }
@@ -590,8 +585,7 @@ void Piece::enPassantWhite(set<Move>& moves, const Board& board) const
    Position posRight(position.getCol() + 1, position.getRow());
    if (posLeft.isValid() && board[posLeft].getType() != SPACE)
    {
-      int num = board[posLeft].getNMoves();
-      if (board[posLeft].getType() == PAWN && !board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].getNMoves() == 1)
+      if (board[posLeft].getType() == PAWN && !board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
@@ -607,7 +601,7 @@ void Piece::enPassantWhite(set<Move>& moves, const Board& board) const
                // Is the position holding a space?
                if (board[pos].getType() == SPACE)
                {
-                  moves.insert(Move(position, pos, SPACE).getText() + "E");
+                  moves.insert(Move(position, pos, SPACE, Move::MoveType::ENPASSANT).getText() + "E");
                }
             }
          }
@@ -631,7 +625,7 @@ void Piece::enPassantWhite(set<Move>& moves, const Board& board) const
                // Is the position holding a space?
                if (board[pos].getType() == SPACE)
                {
-                  moves.insert(Move(position, pos, SPACE).getText() + "E");
+                  moves.insert(Move(position, pos, SPACE, Move::MoveType::ENPASSANT).getText() + "E");
                }
             }
          }
@@ -656,7 +650,7 @@ void Piece::enPassantBlack(set<Move>& moves, const Board& board) const
    Position posRight(position.getCol() + 1, position.getRow());
    if (posLeft.isValid() && board[posLeft].getType() != SPACE)
    {
-      if (board[posLeft].getType() == PAWN && board[posLeft].isWhite()  && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
+      if (board[posLeft].getType() == PAWN && board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
@@ -672,7 +666,7 @@ void Piece::enPassantBlack(set<Move>& moves, const Board& board) const
                // Is the position holding a space?
                if (board[pos].getType() == SPACE)
                {
-                  moves.insert(Move(position, pos, SPACE).getText() + "E");
+                  moves.insert(Move(position, pos, SPACE, Move::MoveType::ENPASSANT).getText() + "E");
                }
             }
          }
@@ -696,7 +690,7 @@ void Piece::enPassantBlack(set<Move>& moves, const Board& board) const
                // Is the position holding a space?
                if (board[pos].getType() == SPACE)
                {
-                  moves.insert(Move(position, pos, SPACE).getText() + "E");
+                  moves.insert(Move(position, pos, SPACE, Move::MoveType::ENPASSANT).getText() + "E");
                }
             }
          }

@@ -253,9 +253,9 @@ void TestKing::getMoves_whiteCastle()
    board.board[4][1] = &white2;
    White white3(PAWN);
    board.board[5][1] = &white3;
-   White white4(ROOK);
+   Rook white4(0, 0, true);
    board.board[0][0] = &white4;
-   White white5(ROOK);
+   Rook white5(7, 0, true);
    board.board[7][0] = &white5;
    set <Move> moves;
 
@@ -307,14 +307,14 @@ void TestKing::getMoves_blackCastle()
    board.board[3][6] = &black2;
    Black black3(PAWN);
    board.board[5][6] = &black3;
-   Black black4(ROOK);
+   Rook black4(0, 7, false);
    board.board[0][7] = &black4;
-   Black black5(ROOK);
+   Rook black5(7, 7, false);
    board.board[7][7] = &black5;
    set <Move> moves;
    // EXERCISE
    king.getMoves(moves, board);
-
+   
    // VERIFY
    assertUnit(moves.size() == 4);  // a couple possible moves
    assertUnit(moves.find(Move("e8d8")) != moves.end());
@@ -366,7 +366,7 @@ void TestKing::getMoves_whiteCastleKingMoved()
    White white5(ROOK);
    board.board[7][0] = &white5;
    set <Move> moves;
-
+   king.incrementNMoves();
    // EXERCISE
    king.getMoves(moves, board);
 
@@ -420,10 +420,11 @@ void TestKing::getMoves_whiteCastleRookMoved()
    White white5(ROOK);
    board.board[7][0] = &white5;
    set <Move> moves;
-
+   white4.incrementNMoves();
+   white5.incrementNMoves();
    // EXERCISE
    king.getMoves(moves, board);
-
+   
    // VERIFY
    assertUnit(moves.size() == 2);  // a couple possible moves
    assertUnit(moves.find(Move("e1d1")) != moves.end());
