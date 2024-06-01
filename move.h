@@ -34,6 +34,7 @@ public:
    // constructor
    Move();
 	Move(Position sourceP, Position destP, PieceType piece);
+	Move(Position sourceP, Position destP, PieceType piece, PieceType promote);
    Move(const string & rhs) {
 		text = rhs;
 		string srcChars = text.substr(0, 2);
@@ -72,7 +73,8 @@ public:
 	bool operator <  (const Move& rhs) const { return dest < rhs.dest; }
 	bool operator == (const Move& rhs) const { return (text == rhs.text); }
 	bool operator != (const Move& rhs) const { return !(*this == rhs); }
-	const Position& operator =  (const Move& rhs) {
+	const Position& operator =  (const Move& rhs) 
+	{
 		source = rhs.source;
 		dest = rhs.dest;
 		promote = rhs.promote;

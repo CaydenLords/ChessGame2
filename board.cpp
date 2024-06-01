@@ -245,9 +245,6 @@ void Board::move(const Move & move)
 
    // Update the piece's position
    pPiece->setPosition(move.dest);
- 
-   pPiece->incrementNMoves();
-   numMoves++;
 
    // for promotion moves
    if (move.isWhite == true && move.promote == QUEEN)
@@ -263,6 +260,9 @@ void Board::move(const Move & move)
       board[move.dest.getCol()][move.dest.getRow()] = new Queen(Position(move.dest.getCol(), move.dest.getRow()), false);
       pPiece = board[move.dest.getCol()][move.dest.getRow()];
    }
+ 
+   pPiece->incrementNMoves();
+   numMoves++;
 
 }
 

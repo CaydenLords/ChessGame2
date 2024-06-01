@@ -528,12 +528,12 @@ void Piece::promoteWhite(set<Move>& moves, const Board& board) const
             // Is the position empty and in the same column?
             if (board[pos].getType() == SPACE && pos.getCol() == 0)
             {
-               moves.insert(Move(position, pos, SPACE).getText() + "q");
+               moves.insert(Move(position, pos, SPACE, QUEEN).getText() + "q");
             }
             // Is there a piece the pawn can capture?
             else if (board[pos].isWhite() == false)
             {
-               moves.insert(Move(position, pos, board[pos].getType()).getText() + "q");
+               moves.insert(Move(position, pos, board[pos].getType(), QUEEN).getText() + "q");
             }
          }
       }
@@ -562,12 +562,12 @@ void Piece::promoteBlack(set<Move>& moves, const Board& board) const
             // Is the position empty and in the same column?
             if (board[pos].getType() == SPACE && pos.getCol() == 0)
             {
-               moves.insert(Move(position, pos, SPACE).getText() + "Q");
+               moves.insert(Move(position, pos, SPACE, QUEEN).getText() + "Q");
             }
             // Is there a piece the pawn can capture?
             else if (board[pos].isWhite() == true)
             {
-               moves.insert(Move(position, pos, board[pos].getType()).getText() + "Q");
+               moves.insert(Move(position, pos, board[pos].getType(), QUEEN).getText() + "Q");
             }
          }
       }

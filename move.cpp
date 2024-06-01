@@ -34,6 +34,14 @@ Move::Move(Position sourceP, Position destP, PieceType piece)
 	capture = piece;
 }
 
+Move::Move(Position sourceP, Position destP, PieceType piece, PieceType promote)
+{
+	source = sourceP;
+	dest = destP;
+	capture = piece;
+	Move::promote = promote;
+}
+
 /*************************************
  * pieceTypeFromLetter
  * INPUT:
