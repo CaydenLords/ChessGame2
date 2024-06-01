@@ -59,7 +59,7 @@ int Piece::getNMoves() const
 
 void Piece::incrementNMoves()
 {
-   nMoves++;
+   nMoves = nMoves+1;
 }
 
 /************************************************
@@ -79,7 +79,7 @@ const Position& Piece::getPosition() const
  ***********************************************/
 bool Piece::justMoved(int currentMove) const
 {
-   return (lastMove == currentMove - 1);
+   return (lastMove == currentMove-1);
 }
 
 /************************************************
@@ -90,7 +90,6 @@ bool Piece::justMoved(int currentMove) const
 void Piece::setLastMove(int currentMove)
 {
    lastMove = currentMove;
-   nMoves++;
 }
 
 void Piece::setPosition(const Position & pos)
@@ -591,7 +590,8 @@ void Piece::enPassantWhite(set<Move>& moves, const Board& board) const
    Position posRight(position.getCol() + 1, position.getRow());
    if (posLeft.isValid() && board[posLeft].getType() != SPACE)
    {
-      if (board[posLeft].getType() == PAWN && !board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
+      int num = board[posLeft].getNMoves();
+      if (board[posLeft].getType() == PAWN && !board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].getNMoves() == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =
@@ -656,7 +656,7 @@ void Piece::enPassantBlack(set<Move>& moves, const Board& board) const
    Position posRight(position.getCol() + 1, position.getRow());
    if (posLeft.isValid() && board[posLeft].getType() != SPACE)
    {
-      if (board[posLeft].getType() == PAWN && board[posLeft].isWhite() && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
+      if (board[posLeft].getType() == PAWN && board[posLeft].isWhite()  && board[posLeft].justMoved(board.getCurrentMove()) && board[posLeft].nMoves == 1)
       {
          // En Passant positions
          Delta possibleMoves[1] =

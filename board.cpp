@@ -212,12 +212,12 @@ void Board::move(const Move & move)
    // for En Passant moves
    if (move.isWhite == true && move.moveType == Move::ENPASSANT)
    {
-      delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
+      delete board[move.dest.getCol()][move.source.getRow()+1]; // Remove the captured pawn
       board[move.dest.getCol()][move.source.getRow()] = nullptr;
    }
    else if (move.isWhite == false && move.moveType == Move::ENPASSANT)
    {
-      delete board[move.dest.getCol()][move.source.getRow()]; // Remove the captured pawn
+      delete board[move.dest.getCol()][move.source.getRow()+1]; // Remove the captured pawn
       board[move.dest.getCol()][move.source.getRow()] = nullptr;
    }
 
@@ -261,6 +261,7 @@ void Board::move(const Move & move)
       pPiece = board[move.dest.getCol()][move.dest.getRow()];
    }
  
+   pPiece->setLastMove(numMoves);
    pPiece->incrementNMoves();
    numMoves++;
 
