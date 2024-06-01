@@ -34,6 +34,9 @@ Move::Move(Position sourceP, Position destP, PieceType piece)
 	capture = piece;
 }
 
+/***************************************************
+ * MOVE : MOVE TYPE CONSTRUCTOR
+ ***************************************************/
 Move::Move(Position sourceP, Position destP, PieceType piece, MoveType moveTypeP)
 {
 	source = sourceP;
@@ -42,6 +45,9 @@ Move::Move(Position sourceP, Position destP, PieceType piece, MoveType moveTypeP
 	moveType = moveTypeP;
 }
 
+/***************************************************
+ * MOVE : PROMOTE CONSTRUCTOR
+ ***************************************************/
 Move::Move(Position sourceP, Position destP, PieceType piece, PieceType promoteP)
 {
 	source = sourceP;
@@ -91,7 +97,8 @@ Move::MoveType Move::getMoveType() const
  **************************************/
 char Move::letterFromPieceType(PieceType pt) const 
 {
-	switch (pt) {
+	switch (pt) 
+	{
 	case PAWN:
 		return 'p';
 	case BISHOP:

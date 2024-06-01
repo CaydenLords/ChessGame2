@@ -36,15 +36,13 @@ public:
 	Move(Position sourceP, Position destP, PieceType piece);
 	Move(Position sourceP, Position destP, PieceType piece, MoveType moveType);
 	Move(Position sourceP, Position destP, PieceType piece, PieceType promote);
-   Move(const string & rhs) {
+   Move(const string & rhs) 
+	{
 		text = rhs;
 		string srcChars = text.substr(0, 2);
 		string destChars = text.substr(2, 2);
 		source = Position(srcChars.c_str());
 		dest = Position(destChars.c_str());
-
-		//source = Position(source.getCol(), source.getRow());
-		//dest = Position(dest.getCol(), dest.getRow());
 
 		if (size(text) == 4)
 		{

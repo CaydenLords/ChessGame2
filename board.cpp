@@ -85,7 +85,8 @@ const Piece& Board::operator [] (const Position& pos) const
    int col = pos.getCol();
    int row = pos.getRow();
 
-   if (board[col][row] == nullptr) {
+   if (board[col][row] == nullptr) 
+   {
       return space;
    }
 
@@ -97,7 +98,8 @@ Piece& Board::operator [] (const Position& pos)
    int row = pos.getRow();
 
 
-   if (board[col][row] == nullptr) {
+   if (board[col][row] == nullptr) 
+   {
       space = Space(col, row);
       return space;
    }
@@ -118,14 +120,16 @@ void Board::display(const Position & posHover, const Position & posSelect, set <
    // draw any selections
    stream.drawHover(posHover);
    stream.drawSelected(posSelect);
-   for (Move item : possible) {
+   for (Move item : possible) 
+   {
       stream.drawPossible(item.dest);
    }
    // draw pieces 
    for (int r = 0; r < 8; r++)
       for (int c = 0; c < 8; c++)
       {
-         if (board[c][r] != nullptr){
+         if (board[c][r] != nullptr)
+         {
             board[c][r]->display(&stream);
          }
       }

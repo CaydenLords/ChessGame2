@@ -77,7 +77,8 @@ class BoardDummy : public Board
 {
    friend TestBoard;
 public:
-   BoardDummy() : Board(nullptr, true /*noreset*/) {
+   BoardDummy() : Board(nullptr, true /*noreset*/) 
+   {
       numMoves = 0;
       for (int i = 0; i < 8; i++) // Microsoft Copilot helped me with this
       {
